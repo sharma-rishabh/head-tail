@@ -1,13 +1,13 @@
-const splitBy = (content) => content.split('\n');
+const splitBy = (content, separator) => content.split(separator);
 
-const joinBy = (array) => array.join('\n');
+const joinBy = (array, connector) => array.join(connector);
 
 const extractData = (array, numOfElements) => array.slice(0, numOfElements);
 
 const head = (content, numOfLines) => {
-  const splitContent = splitBy(content);
+  const splitContent = splitBy(content, '\n');
   const requiredContent = extractData(splitContent, numOfLines);
-  return joinBy(requiredContent);
+  return joinBy(requiredContent, '\n');
 };
 
 const headMain = (readFile, fileName) => {

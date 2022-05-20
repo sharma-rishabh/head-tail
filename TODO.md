@@ -1,6 +1,5 @@
 **TODO**
 
-- [ ] Implement `splitBy` and `joinBy` to take a separator.
 - [ ] Implement `head` to take a separator.
 - [ ] Implement `parseArgs`.
 
@@ -24,3 +23,5 @@
 - [x] Implement `headMain`(It should take the file and pass the content to `head`).
 - [x] make `head fileName` work.
 - [x] Implement `head` to work with count.
+- [x] Implement `splitBy` to take a separator.
+- [x] Implement `joinBy` to take a connector.
