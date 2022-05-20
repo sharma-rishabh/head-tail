@@ -4,15 +4,15 @@ const joinBy = (array, connector) => array.join(connector);
 
 const extractData = (array, numOfElements) => array.slice(0, numOfElements);
 
-const head = (content, numOfLines) => {
-  const splitContent = splitBy(content, '\n');
+const head = (content, numOfLines, separator) => {
+  const splitContent = splitBy(content, separator);
   const requiredContent = extractData(splitContent, numOfLines);
-  return joinBy(requiredContent, '\n');
+  return joinBy(requiredContent, separator);
 };
 
 const headMain = (readFile, fileName) => {
   const content = readFile(fileName, 'utf8');
-  return head(content, 10);
+  return head(content, 10, '\n');
 };
 
 exports.extractData = extractData;

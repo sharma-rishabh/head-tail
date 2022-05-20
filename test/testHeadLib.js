@@ -46,23 +46,26 @@ describe('joinBy', () => {
   });
 });
 
-describe('head', () => {
+describe.only('head', () => {
   it('should give head of an empty file.', () => {
-    return assert.strictEqual(head('', 10), '');
+    return assert.strictEqual(head('', 10, '\n'), '');
   });
   it('should give same content back if lines are less than given num of lines', () => {
-    return assert.strictEqual(head('a\nb'), 'a\nb');
+    return assert.strictEqual(head('a\nb', 10, '\n'), 'a\nb');
   });
   it('should give first 10 lines of the file if given num of lines is 10',
     () => {
       const content = 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk';
       const expectedContent = 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj';
-      return assert.strictEqual(head(content, 10), expectedContent);
+      return assert.strictEqual(head(content, 10, '\n'), expectedContent);
     });
   it('should give required number of lines form a file.',
     () => {
       const content = 'a\nb\nc\nd\ne';
       const expectedContent = 'a\nb';
-      return assert.strictEqual(head(content, 2), expectedContent);
+      return assert.strictEqual(head(content, 2, '\n'), expectedContent);
     });
+  it('should take a separator and should count and split based on that.', () => {
+    return assert.strictEqual(head('ab', 1, ''), 'a');
+  });
 });
