@@ -37,4 +37,10 @@ describe('head', () => {
   it('should give same content back if lines are less than 10', () => {
     return assert.strictEqual(head('a\nb'), 'a\nb');
   });
+  it('should give first 10 lines of the content if it is more than 10 lines',
+    () => {
+      const content = 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk';
+      const expectedContent = 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj';
+      return assert.strictEqual(head(content), expectedContent);
+    });
 });
