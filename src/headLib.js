@@ -10,7 +10,13 @@ const head = (content) => {
   return joinBy(requiredContent);
 };
 
+const headMain = (readFile, fileName) => {
+  const content = readFile(fileName, 'utf8');
+  return head(content);
+};
+
 exports.extractData = extractData;
 exports.splitBy = splitBy;
 exports.joinBy = joinBy;
 exports.head = head;
+exports.headMain = headMain;

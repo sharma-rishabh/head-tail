@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { extractData, splitBy, joinBy, head } = require('../src/headLib.js');
+const { extractData, splitBy, joinBy, head, headMain } = require('../src/headLib.js');
 
 describe('extractData', () => {
   it('should give array back if array length is equal to specified count.',
@@ -53,4 +53,20 @@ describe('head', () => {
       const expectedContent = 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj';
       return assert.strictEqual(head(content), expectedContent);
     });
+});
+
+describe('headMain', () => {
+
+  const mockReadFile = (expectedFileName, content) => {
+    return (fileName, encoding) => {
+      assert.equal(fileName, expectedFileName);
+      assert.equal(encoding, 'utf8');
+      return content;
+    };
+  };
+
+  it('should take file from main and pass the content to head.', () => {
+    const mockedReadFile = mockReadFile('a.txt', 'a\nb');
+    return assert.strictEqual(headMain(mockedReadFile, 'a.txt'), 'a\nb');
+  });
 });
