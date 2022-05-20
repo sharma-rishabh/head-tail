@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { extractData, splitBy, joinBy } = require('../src/headLib.js');
+const { extractData, splitBy, joinBy, head } = require('../src/headLib.js');
 
 describe('extractData', () => {
   it('should give array back if array has only 10 elements.', () => {
@@ -27,5 +27,14 @@ describe('splitBy', () => {
 describe('joinBy', () => {
   it('should join given array with \n', () => {
     return assert.strictEqual(joinBy(['a', 'b']), 'a\nb');
+  });
+});
+
+describe('head', () => {
+  it('should give head of an empty file.', () => {
+    return assert.strictEqual(head(''), '');
+  });
+  it('should give same content back if lines are less than 10', () => {
+    return assert.strictEqual(head('a\nb'), 'a\nb');
   });
 });
