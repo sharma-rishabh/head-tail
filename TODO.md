@@ -20,3 +20,4 @@
 - [x] Make `headLib.js`
 - [x] `extractData` should give the whole array back if length is less than 10.
 - [x] Make `extractData` work for any given array.
+- [x] Add test for `splitBy` and `joinBy`.

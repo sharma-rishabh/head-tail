@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { extractData } = require('../src/headLib.js');
+const { extractData, splitBy, joinBy } = require('../src/headLib.js');
 
 describe('extractData', () => {
   it('should give array back if array has only 10 elements.', () => {
@@ -16,4 +16,16 @@ describe('extractData', () => {
       const expectedArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       return assert.deepStrictEqual(extractData(array), expectedArray);
     });
+});
+
+describe('splitBy', () => {
+  it('should split content by \n', () => {
+    return assert.deepStrictEqual(splitBy('a\nb'), ['a', 'b']);
+  });
+});
+
+describe('joinBy', () => {
+  it('should join given array with \n', () => {
+    return assert.strictEqual(joinBy(['a', 'b']), 'a\nb');
+  });
 });
