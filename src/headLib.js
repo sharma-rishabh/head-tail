@@ -1,3 +1,5 @@
+const { parseArgs } = require('./parseArgs.js');
+
 const splitBy = (content, separator) => content.split(separator);
 
 const joinBy = (array, connector) => array.join(connector);
@@ -10,9 +12,10 @@ const head = (content, { count: numOfLines, separator }) => {
   return joinBy(requiredContent, separator);
 };
 
-const headMain = (readFile, fileName) => {
+const headMain = (readFile, ...args) => {
+  const { fileName, options } = parseArgs(args);
   const content = readFile(fileName, 'utf8');
-  return head(content, { count: 10, separator: '\n' });
+  return head(content, options);
 };
 
 exports.extractData = extractData;
