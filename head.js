@@ -1,3 +1,9 @@
+const { headMain } = require('./src/headLib.js');
 const { log } = require('console');
+const fs = require('fs');
 
-log('usage: head [-n lines | -c bytes] [file ...]');
+const main = () => {
+  log(headMain(fs.readFileSync, process.argv[2]));
+};
+
+main();

@@ -1,6 +1,5 @@
 **TODO**
 
-- [ ] make `head fileName` work.
 - [ ] Implement `head` to work with count.
 - [ ] Implement `splitBy` and `joinBy` to take a separator.
 - [ ] Implement `head` to take a separator.
@@ -23,3 +22,4 @@
 - [x] Implement `head` to work for content not file.
 - [x] Implement  `extractData` to accept count.
 - [x] Implement `headMain`(It should take the file and pass the content to `head`).
+- [x] make `head fileName` work.
