@@ -1,6 +1,11 @@
 **TODO**
 
 - [ ] Implement `parseArgs`.
+  - [x] should give default options if no cl options are passed.
+  - [x] should work with `-n count`
+  - [x] should work with `-c count `
+  - [ ] should work with `-ncount`
+  - [ ] should work with `-ccount`
 
 **MAYBE**
 

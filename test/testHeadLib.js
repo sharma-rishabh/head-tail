@@ -46,7 +46,7 @@ describe('joinBy', () => {
   });
 });
 
-describe.only('head', () => {
+describe('head', () => {
   it('should give head of an empty file.', () => {
     return assert.strictEqual(head('', 10, '\n'), '');
   });
