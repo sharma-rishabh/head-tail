@@ -18,4 +18,10 @@ describe('headMain', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
     return assert.strictEqual(headMain(mockedReadFile, '-n', '2', 'a.txt'), 'a\nb');
   });
+  it('should throw an error if file is not present.', () => {
+    const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
+    return assert.throws(() => headMain(mockedReadFile, 'b.txt', {
+      name: 'fileReadError', message: 'cannot open b.txt', fileName: 'b.txt'
+    }));
+  });
 });

@@ -14,7 +14,16 @@ const head = (content, { count: numOfLines, separator }) => {
 
 const headMain = (readFile, ...args) => {
   const { fileName, options } = parseArgs(args);
-  const content = readFile(fileName, 'utf8');
+  let content;
+  try {
+    content = readFile(fileName, 'utf8');
+  } catch (error) {
+    throw {
+      name: 'fileReadError',
+      message: `cannot open ${fileName}`,
+      fileName
+    };
+  }
   return head(content, options);
 };
 

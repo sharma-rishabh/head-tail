@@ -1,5 +1,4 @@
 **TODO**
-
 - [ ] Implement `parseArgs`.
   - [x] should give default options if no cl options are passed.
   - [x] should work with `-n count`
@@ -9,7 +8,6 @@
 
 **MAYBE**
 
-- [ ] Consider changing the name of `extractData` to `extractLines`
 
 **DONE**
 
@@ -34,3 +32,5 @@
 - [x] change contract of `head` to accept options.
 - [x] change contract of headMain to accept cl options.
 - [x] hookup parseArgs with headMain.
+- [x] surround read file with try catch.
+- [x] ~~Consider changing the name of `extractData` to `extractLines`~~
