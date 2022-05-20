@@ -1,7 +1,5 @@
 **TODO**
 
-- [ ] `extractData` should give the whole array back if length is less than 10.
-- [ ] Make `extractData` work for any given array.
 - [ ] Implement `splitBy` and `joinBy`.
 - [ ] Implement `head` to work for content not file.
 
@@ -16,3 +14,5 @@
 - [x] Write expectation for `extractData`
 - [x] Write `extractData`
 - [x] Make `headLib.js`
+- [x] `extractData` should give the whole array back if length is less than 10.
+- [x] Make `extractData` work for any given array.

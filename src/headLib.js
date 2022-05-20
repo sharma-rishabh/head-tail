@@ -1,3 +1,3 @@
-const extractData = () => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const extractData = (array) => array.slice(0, 10);
 
 exports.extractData = extractData;
