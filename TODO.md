@@ -1,5 +1,7 @@
 **TODO**
 
+- [ ] change contract of headMain to accept cl options.
+- [ ] hookup parseArgs with headMain.
 - [ ] Implement `parseArgs`.
   - [x] should give default options if no cl options are passed.
   - [x] should work with `-n count`
@@ -31,3 +33,4 @@
 - [x] Implement `joinBy` to take a connector.
 - [x] Separate test for headMain.
 - [x] Implement `head` to take a separator.
+- [x] change contract of `head` to accept options.
