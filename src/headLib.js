@@ -6,7 +6,8 @@ const joinBy = (array, connector) => array.join(connector);
 
 const extractData = (array, numOfElements) => array.slice(0, numOfElements);
 
-const head = (content, { count: numOfLines, separator }) => {
+const head = (content, { count: numOfLines, option }) => {
+  const separator = option === '-n' ? '\n' : '';
   const splitContent = splitBy(content, separator);
   const requiredContent = extractData(splitContent, numOfLines);
   return joinBy(requiredContent, separator);

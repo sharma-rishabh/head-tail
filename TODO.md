@@ -1,4 +1,6 @@
 **TODO**
+
+- [ ] Make headMain for multiple files.
 - [ ] Implement `parseArgs`.
   - [x] should give default options if no cl options are passed.
   - [x] should work with `-n count`
@@ -34,3 +36,5 @@
 - [x] hookup parseArgs with headMain.
 - [x] surround read file with try catch.
 - [x] ~~Consider changing the name of `extractData` to `extractLines`~~
+- [x] Refactor parseArgs.
+- [x] Move decision of assigning separator from parseArgs to head.

@@ -49,12 +49,12 @@ describe('joinBy', () => {
 describe('head', () => {
   it('should give head of an empty file.', () => {
     return assert.strictEqual(
-      head('', { count: 10, separator: '\n' }), ''
+      head('', { count: 10, option: '-n' }), ''
     );
   });
   it('should give same content back if lines are less than given num of lines', () => {
     return assert.strictEqual(
-      head('a\nb', { count: 10, separator: '\n' }),
+      head('a\nb', { count: 10, option: '-n' }),
       'a\nb'
     );
   });
@@ -63,7 +63,7 @@ describe('head', () => {
       const content = 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk';
       const expectedContent = 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj';
       return assert.strictEqual(
-        head(content, { count: 10, separator: '\n' }), expectedContent
+        head(content, { count: 10, option: '-n' }), expectedContent
       );
     });
   it('should give required number of lines form a file.',
@@ -71,12 +71,12 @@ describe('head', () => {
       const content = 'a\nb\nc\nd\ne';
       const expectedContent = 'a\nb';
       return assert.strictEqual(
-        head(content, { count: 2, separator: '\n' }), expectedContent
+        head(content, { count: 2, option: '-n' }), expectedContent
       );
     });
   it('should take a separator and should count and split based on that.', () => {
     return assert.strictEqual(head(
-      'ab', { count: 1, separator: '' }), 'a'
+      'ab', { count: 1, option: '-c' }), 'a'
     );
   });
 });
