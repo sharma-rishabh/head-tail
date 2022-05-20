@@ -1,6 +1,5 @@
 **TODO**
 
-- [ ] Implement `head` to take a separator.
 - [ ] Implement `parseArgs`.
 
 **MAYBE**
@@ -26,3 +25,4 @@
 - [x] Implement `splitBy` to take a separator.
 - [x] Implement `joinBy` to take a connector.
 - [x] Separate test for headMain.
+- [x] Implement `head` to take a separator.
