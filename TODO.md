@@ -1,7 +1,10 @@
 **TODO**
 
-- [ ] Implement `splitBy` and `joinBy`.
 - [ ] Implement `head` to work for content not file.
+- [ ] Implement  `extractData` to accept count.
+- [ ] Implement `head` to work with count.
+- [ ] Implement `splitBy` and `joinBy` to take a separator.
+- [ ] Implement `head` to take a separator.
 
 **MAYBE**
 
@@ -9,6 +12,7 @@
 
 **DONE**
 
+- [x] Implement `splitBy` and `joinBy`.
 - [x] Make `src` and `test` directories.
 - [x] Make `testHeadLib.js`
 - [x] Write expectation for `extractData`
