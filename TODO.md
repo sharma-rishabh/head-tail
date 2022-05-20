@@ -1,6 +1,5 @@
 **TODO**
 
-- [ ] Implement  `extractData` to accept count.
 - [ ] Implement `head` to work with count.
 - [ ] Implement `splitBy` and `joinBy` to take a separator.
 - [ ] Implement `head` to take a separator.
@@ -21,3 +20,4 @@
 - [x] Make `extractData` work for any given array.
 - [x] Add test for `splitBy` and `joinBy`.
 - [x] Implement `head` to work for content not file.
+- [x] Implement  `extractData` to accept count.
