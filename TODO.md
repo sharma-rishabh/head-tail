@@ -25,3 +25,4 @@
 - [x] Implement `head` to work with count.
 - [x] Implement `splitBy` to take a separator.
 - [x] Implement `joinBy` to take a connector.
+- [x] Separate test for headMain.
