@@ -21,7 +21,7 @@ const headMain = (readFile, ...args) => {
   } catch (error) {
     throw {
       name: 'fileReadError',
-      message: `cannot open ${fileName}`,
+      message: `head: ${fileName}: No such file or directory`,
       fileName
     };
   }

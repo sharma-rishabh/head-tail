@@ -20,8 +20,8 @@ describe('headMain', () => {
   });
   it('should throw an error if file is not present.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
-    return assert.throws(() => headMain(mockedReadFile, 'b.txt', {
-      name: 'fileReadError', message: 'cannot open b.txt', fileName: 'b.txt'
-    }));
+    return assert.throws(() => headMain(mockedReadFile, 'b.txt'), {
+      name: 'fileReadError', message: 'head: b.txt: No such file or directory', fileName: 'b.txt'
+    });
   });
 });

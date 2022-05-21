@@ -2,7 +2,18 @@ const isOption = (option) => {
   return option.startsWith('-');
 };
 
+const assertArgumentsValidity = (args) => {
+  if (args === undefined) {
+    throw {
+      name: 'noArguments',
+      message: 'usage: head [-n lines | -c bytes] [file ...]'
+    };
+  }
+  return true;
+};
+
 const parseArgs = (args) => {
+  assertArgumentsValidity(args);
   let index = 0;
   const optionsArray = [];
   while (index < args.length && isOption(args[index])) {
