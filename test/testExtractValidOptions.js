@@ -19,6 +19,19 @@ describe('validateOptions', () => {
   it('should return the array it got if they are valid.', () => {
     return assert.deepStrictEqual(validateOptions([{ option: '-n', count: 10 }]), [{ option: '-n', count: 10 }]);
   });
+  it('should throw  differentOptions error if different options are given at the same time.', () => {
+    return assert.throws(() => validateOptions([{ option: '-n', count: 10 }, { option: '-c', count: 10 }]), {
+      name: 'differentOptions',
+      message: 'head:can\'t combine line and byte counts'
+    });
+  });
+  it('should throw  invalidSwitch error if options are provided are not valid.', () => {
+    return assert.throws(() => validateOptions([{ option: '-d', count: 10 }, { option: '-c', count: 10 }]), {
+      name: 'invalidSwitch',
+      message: 'head:illegal option --d',
+      option: '-d'
+    });
+  });
 });
 
 describe('areAllSwitchesSame', () => {
@@ -35,6 +48,10 @@ describe('assertSwitchesValidity', () => {
     return assert.ok(assertSwitchesValidity([{ option: '-n', count: 10 }, { option: '-c', count: 10 }]));
   });
   it('should throw error if all switches are not valid.', () => {
-    return assert.throws(() => assertSwitchesValidity([{ option: '-d', count: 10 }, { option: '-c', count: 10 }]));
+    return assert.throws(() => assertSwitchesValidity([{ option: '-d', count: 10 }, { option: '-c', count: 10 }]), {
+      name: 'invalidSwitch',
+      message: 'head:illegal option --d',
+      option: '-d'
+    });
   });
 });

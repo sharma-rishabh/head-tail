@@ -19,7 +19,7 @@ const assertSwitchesValidity = (options) => {
     if (!validOptions.includes(option.option)) {
       throw {
         name: 'invalidSwitch',
-        message: `illegal option -${option.option}`,
+        message: `head:illegal option -${option.option}`,
         option: option.option
       };
     }
@@ -28,7 +28,17 @@ const assertSwitchesValidity = (options) => {
 };
 
 const extractValidOption = (options) => options[options.length - 1];
-const validateOptions = (options) => options;
+
+const validateOptions = (options) => {
+  assertSwitchesValidity(options);
+  if (!areAllSwitchesSame(options)) {
+    throw {
+      name: 'differentOptions',
+      message: 'head:can\'t combine line and byte counts'
+    };
+  }
+  return options;
+};
 
 exports.extractValidOption = extractValidOption;
 exports.validateOptions = validateOptions;
