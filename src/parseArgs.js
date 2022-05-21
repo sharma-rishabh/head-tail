@@ -4,18 +4,6 @@ const isOption = (option) => {
 
 const getOption = (args) => isOption(args[0]) ? args[0] : '-n';
 
-const getOptions = (args) => {
-  let index = 0;
-  const options = [];
-  while (index < args.length && isOption(args[index])) {
-    const option = args[index];
-    const count = args[index + 1];
-    options.push({ option, count });
-    index += 2;
-  }
-  return options;
-};
-
 const getCount = (args) => isOption(args[0]) ? +args[1] : 10;
 
 const getFiles = (args) => {
@@ -24,14 +12,18 @@ const getFiles = (args) => {
 };
 
 const parseArgs = (args) => {
-  const files = getFiles(args);
-  const option = getOption(args);
-  const count = getCount(args);
-
-  const options = { option, count };
+  let index = 0;
+  const optionsArray = [];
+  while (index < args.length && isOption(args[index])) {
+    const option = args[index];
+    const count = +args[index + 1];
+    optionsArray.push({ option, count });
+    index += 2;
+  }
+  const files = args.slice(index);
+  const options = optionsArray.length === 0 ? { option: '-n', count: 10 } : optionsArray[optionsArray.length - 1];
   return { files, options };
 };
 
 exports.parseArgs = parseArgs;
 exports.getFiles = getFiles;
-exports.getOptions = getOptions;

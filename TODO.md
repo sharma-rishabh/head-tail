@@ -44,3 +44,4 @@
 - [ ] ~~Implement `getOptions` in parseArgs using while loop.~~
 - [x] Implement `isOption`
 - [x] Implement `parseArgs` to give the last option if multiple options are given
+- [x] move get options inside parseArgs.
