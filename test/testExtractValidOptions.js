@@ -29,7 +29,7 @@ describe('validateOptions', () => {
   it('should throw  invalidSwitch error if options are provided are not valid.', () => {
     return assert.throws(() => validateOptions([{ option: '-d', count: 10 }, { option: '-c', count: 10 }]), {
       name: 'invalidSwitch',
-      message: 'head:illegal option --d',
+      message: 'head:illegal option --d\nusage: head [-n lines | -c bytes] [file ...]',
       option: '-d'
     });
   });
@@ -51,7 +51,7 @@ describe('assertSwitchesValidity', () => {
   it('should throw error if all switches are not valid.', () => {
     return assert.throws(() => assertSwitchesValidity([{ option: '-d', count: 10 }, { option: '-c', count: 10 }]), {
       name: 'invalidSwitch',
-      message: 'head:illegal option --d',
+      message: 'head:illegal option --d\nusage: head [-n lines | -c bytes] [file ...]',
       option: '-d'
     });
   });

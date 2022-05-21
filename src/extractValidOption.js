@@ -19,7 +19,8 @@ const assertSwitchesValidity = (options) => {
     if (!validOptions.includes(option.option)) {
       throw {
         name: 'invalidSwitch',
-        message: `head:illegal option -${option.option}`,
+        message: `head:illegal option -${option.option}
+usage: head [-n lines | -c bytes] [file ...]`,
         option: option.option
       };
     }

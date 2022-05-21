@@ -46,7 +46,6 @@
 - [x] move get options inside parseArgs.
 - [x] get rid of all unnecessary functions in `parseArgs`.
 - [x] change contract of parseArgs to return all option objects.
-- [x] Implement `extractValidOption`
 - [x] Implement `validateOptions`
 - [x] Implement `areAllSwitchesSame`
 - [x] Implement `assertSwitchesValidity`
@@ -59,3 +58,5 @@
 - [x] show usage if no arguments are provided.
 - [x] fix error format for read file errors
 - [x] pull readFile try catch out of main.
+- [x] Implement `extractValidOption`
+- [x] fix error message for illegalOption. 
