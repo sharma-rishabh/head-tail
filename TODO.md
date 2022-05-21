@@ -1,5 +1,10 @@
 **TODO**
 
+- [ ] Add extraction of option in `headMain`
+- [ ] Implement `validateOptions`
+- [ ] Implement `extractOption`
+- [ ] Implement `areAllSwitchesSame`
+- [ ] Implement `isSwitchValid`
 - [ ] remove `getFiles`
 - [ ] Make headMain for multiple files.
 - [ ] Implement `parseArgs`.
@@ -45,3 +50,4 @@
 - [x] Implement `isOption`
 - [x] Implement `parseArgs` to give the last option if multiple options are given
 - [x] move get options inside parseArgs.
+- [x] get rid of all unnecessary functions in `parseArgs`.

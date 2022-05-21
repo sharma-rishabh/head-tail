@@ -2,15 +2,6 @@ const isOption = (option) => {
   return option.startsWith('-');
 };
 
-const getOption = (args) => isOption(args[0]) ? args[0] : '-n';
-
-const getCount = (args) => isOption(args[0]) ? +args[1] : 10;
-
-const getFiles = (args) => {
-  const optionOrValue = /^-|^[0-9]*$/;
-  return args.filter((arg) => !optionOrValue.test(arg));
-};
-
 const parseArgs = (args) => {
   let index = 0;
   const optionsArray = [];
@@ -26,4 +17,3 @@ const parseArgs = (args) => {
 };
 
 exports.parseArgs = parseArgs;
-exports.getFiles = getFiles;
