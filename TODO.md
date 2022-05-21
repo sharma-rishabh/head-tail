@@ -1,8 +1,8 @@
 **TODO**
 
+- [ ] add `areSwitchesValid` and `areAllSwitchesSame` to `validateOptions`
 - [ ] Add extraction of option in `headMain`
-- [ ] Implement `areAllSwitchesSame`
-- [ ] Implement `isSwitchValid`
+- [ ] Implement `areSwitchValid`
 - [ ] remove `getFiles`
 - [ ] Make headMain for multiple files.
 - [ ] Implement `parseArgs`.
@@ -52,3 +52,4 @@
 - [x] change contract of parseArgs to return all option objects.
 - [x] Implement `extractValidOption`
 - [x] Implement `validateOptions`
+- [x] Implement `areAllSwitchesSame`
