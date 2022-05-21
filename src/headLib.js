@@ -1,7 +1,6 @@
 const { parseArgs } = require('./parseArgs.js');
 
 const splitBy = (content, separator) => content.split(separator);
-
 const joinBy = (array, connector) => array.join(connector);
 
 const extractData = (array, numOfElements) => array.slice(0, numOfElements);
