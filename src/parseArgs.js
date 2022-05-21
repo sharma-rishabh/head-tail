@@ -12,8 +12,10 @@ const parseArgs = (args) => {
     index += 2;
   }
   const files = args.slice(index);
-  const options = optionsArray.length === 0 ? { option: '-n', count: 10 } : optionsArray[optionsArray.length - 1];
-  return { files, options };
+  if (optionsArray.length === 0) {
+    optionsArray.push({ option: '-n', count: 10 });
+  }
+  return { files, optionsArray };
 };
 
 exports.parseArgs = parseArgs;

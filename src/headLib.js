@@ -14,7 +14,7 @@ const head = (content, { count: numOfLines, option }) => {
 };
 
 const headMain = (readFile, ...args) => {
-  const { files: [fileName], options } = parseArgs(args);
+  const { files: [fileName], optionsArray } = parseArgs(args);
   let content;
   try {
     content = readFile(fileName, 'utf8');
@@ -25,7 +25,7 @@ const headMain = (readFile, ...args) => {
       fileName
     };
   }
-  return head(content, options);
+  return head(content, optionsArray[optionsArray.length - 1]);
 };
 
 exports.extractData = extractData;
