@@ -1,7 +1,5 @@
 **TODO**
 
-- [ ] Add extraction of option in `headMain`
-- [ ] remove `getFiles`
 - [ ] Make headMain for multiple files.
 - [ ] Implement `parseArgs`.
   - [x] should give default options if no cl options are passed.
@@ -54,3 +52,5 @@
 - [x] Implement `assertSwitchesValidity`
 - [x] add `areSwitchesValid` and `areAllSwitchesSame` to `validateOptions`
 - [x] add `validateOptions` in `extractOptions`
+- [x] remove `getFiles`
+- [x] Add extraction of option in `headMain`

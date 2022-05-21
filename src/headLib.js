@@ -1,4 +1,5 @@
 const { parseArgs } = require('./parseArgs.js');
+const { extractValidOption } = require('./extractValidOption.js');
 
 const splitBy = (content, separator) => content.split(separator);
 const joinBy = (array, connector) => array.join(connector);
@@ -24,7 +25,7 @@ const headMain = (readFile, ...args) => {
       fileName
     };
   }
-  return head(content, optionsArray[optionsArray.length - 1]);
+  return head(content, extractValidOption(optionsArray));
 };
 
 exports.extractData = extractData;
