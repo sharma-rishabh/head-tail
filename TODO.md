@@ -1,5 +1,10 @@
 **TODO**
 
+- [ ] Implement `areOptionsSame`
+- [ ] Implement `areOptionsValid` 
+- [ ] Implement `getOption` in parseArgs.
+- [ ] Implement `getFiles` in parseArgs.
+- [ ] change contract of headMain to accept fileName as array.
 - [ ] Make headMain for multiple files.
 - [ ] Implement `parseArgs`.
   - [x] should give default options if no cl options are passed.
