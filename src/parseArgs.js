@@ -1,9 +1,20 @@
 const isOption = (option) => {
-  const options = ['-n', '-c'];
-  return options.includes(option);
+  return option.startsWith('-');
 };
 
 const getOption = (args) => isOption(args[0]) ? args[0] : '-n';
+
+const getOptions = (args) => {
+  let index = 0;
+  const options = [];
+  while (index < args.length && isOption(args[index])) {
+    const option = args[index];
+    const count = args[index + 1];
+    options.push({ option, count });
+    index += 2;
+  }
+  return options;
+};
 
 const getCount = (args) => isOption(args[0]) ? +args[1] : 10;
 
@@ -23,3 +34,4 @@ const parseArgs = (args) => {
 
 exports.parseArgs = parseArgs;
 exports.getFiles = getFiles;
+exports.getOptions = getOptions;

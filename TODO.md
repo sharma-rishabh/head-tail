@@ -1,8 +1,6 @@
 **TODO**
 
-- [ ] Implement `areOptionsSame`
-- [ ] Implement `areOptionsValid` 
-- [ ] Implement `getOption` in parseArgs.
+- [ ] remove `getFiles`
 - [ ] Make headMain for multiple files.
 - [ ] Implement `parseArgs`.
   - [x] should give default options if no cl options are passed.
@@ -43,3 +41,6 @@
 - [x] Move decision of assigning separator from parseArgs to head.
 - [x] change contract of headMain to accept fileName as array.
 - [x] Implement `getFiles` in parseArgs.
+- [ ] ~~Implement `getOptions` in parseArgs using while loop.~~
+- [x] Implement `isOption`
+- [x] Implement `parseArgs` to give the last option if multiple options are given
