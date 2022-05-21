@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { parseArgs } = require('../src/parseArgs.js');
+const { parseArgs, getFiles } = require('../src/parseArgs.js');
 
 describe('parseArgs', () => {
   it('should work with option(-n) with spaces before count.', () => {
@@ -19,5 +19,17 @@ describe('parseArgs', () => {
       parseArgs(['a.txt']),
       { files: ['a.txt'], options: { option: '-n', count: 10 } }
     );
+  });
+});
+
+describe('getFiles', () => {
+  it('should give single file back from the given array.', () => {
+    return assert.deepStrictEqual(getFiles(['a.txt']), ['a.txt']);
+  });
+  it('should give multiple files back from the given array if there are multiple files.', () => {
+    return assert.deepStrictEqual(getFiles(['a.txt', 'b.txt']), ['a.txt', 'b.txt']);
+  });
+  it('should give the file out of options and file', () => {
+    return assert.deepStrictEqual(getFiles(['-n', '50', 'b.txt']), ['b.txt']);
   });
 });

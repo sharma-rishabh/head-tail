@@ -3,7 +3,6 @@
 - [ ] Implement `areOptionsSame`
 - [ ] Implement `areOptionsValid` 
 - [ ] Implement `getOption` in parseArgs.
-- [ ] Implement `getFiles` in parseArgs.
 - [ ] Make headMain for multiple files.
 - [ ] Implement `parseArgs`.
   - [x] should give default options if no cl options are passed.
@@ -43,3 +42,4 @@
 - [x] Refactor parseArgs.
 - [x] Move decision of assigning separator from parseArgs to head.
 - [x] change contract of headMain to accept fileName as array.
+- [x] Implement `getFiles` in parseArgs.
