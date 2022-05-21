@@ -20,9 +20,15 @@ describe('parseArgs', () => {
       { files: ['a.txt'], optionsArray: [{ option: '-n', count: 10 }] }
     );
   });
-  it('should return the last option if many options are given', () => {
+  it('should return all options as objects if multiple objects are given', () => {
     return assert.deepStrictEqual(
       parseArgs(['-n', '20', '-n', '10', 'a.txt']),
+      { files: ['a.txt'], optionsArray: [{ option: '-n', count: 20 }, { option: '-n', count: 10 }] }
+    );
+  });
+  it('should return the similar object if options are integrated', () => {
+    return assert.deepStrictEqual(
+      parseArgs(['-n20', '-n', '10', 'a.txt']),
       { files: ['a.txt'], optionsArray: [{ option: '-n', count: 20 }, { option: '-n', count: 10 }] }
     );
   });

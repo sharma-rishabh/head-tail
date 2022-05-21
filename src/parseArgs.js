@@ -2,6 +2,11 @@ const isOption = (option) => {
   return option.startsWith('-');
 };
 
+const isOptionIntegrated = (flag) => {
+  const endWithDigits = /\d$/;
+  return endWithDigits.test(flag);
+};
+
 const assertArgumentsValidity = (args) => {
   if (args.length === 0) {
     throw {
@@ -12,15 +17,26 @@ const assertArgumentsValidity = (args) => {
   return true;
 };
 
+const extractOption = (integratedOption) => integratedOption.slice(0, 2);
+const extractCount = (integratedOption) => +integratedOption.slice(2);
+
 const parseArgs = (args) => {
   assertArgumentsValidity(args);
   let index = 0;
   const optionsArray = [];
   while (index < args.length && isOption(args[index])) {
-    const option = args[index];
-    const count = +args[index + 1];
+    let option;
+    let count;
+    if (isOptionIntegrated(args[index])) {
+      option = extractOption(args[index]);
+      count = extractCount(args[index]);
+    } else {
+      option = args[index];
+      count = +args[index + 1];
+      index++;
+    }
     optionsArray.push({ option, count });
-    index += 2;
+    index++;
   }
   const files = args.slice(index);
   if (optionsArray.length === 0) {
