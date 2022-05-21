@@ -7,15 +7,15 @@ const getOption = (args) => isOption(args[0]) ? args[0] : '-n';
 
 const getCount = (args) => isOption(args[0]) ? +args[1] : 10;
 
-const getFileName = (args) => args[args.length - 1];
+const getFiles = (args) => [args[args.length - 1]];
 
 const parseArgs = (args) => {
-  const fileName = getFileName(args);
+  const files = getFiles(args);
   const option = getOption(args);
   const count = getCount(args);
 
   const options = { option, count };
-  return { fileName, options };
+  return { files, options };
 };
 
 exports.parseArgs = parseArgs;

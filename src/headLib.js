@@ -14,7 +14,7 @@ const head = (content, { count: numOfLines, option }) => {
 };
 
 const headMain = (readFile, ...args) => {
-  const { fileName, options } = parseArgs(args);
+  const { files: [fileName], options } = parseArgs(args);
   let content;
   try {
     content = readFile(fileName, 'utf8');
