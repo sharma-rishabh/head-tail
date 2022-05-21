@@ -38,12 +38,26 @@ const validateOptions = (options) => {
   return options;
 };
 
+const assertLineCountValidity = (option) => {
+  if (option.count < 1) {
+    throw {
+      name: 'illegalLineCount',
+      message: `head: illegal line count -- ${option.count}`,
+      count: option.count
+    };
+  }
+  return true;
+};
+
 const extractValidOption = (options) => {
   validateOptions(options);
-  return options[options.length - 1];
+  const validOption = options[options.length - 1];
+  assertLineCountValidity(validOption);
+  return validOption;
 };
 
 exports.extractValidOption = extractValidOption;
 exports.validateOptions = validateOptions;
 exports.areAllSwitchesSame = areAllSwitchesSame;
 exports.assertSwitchesValidity = assertSwitchesValidity;
+exports.assertLineCountValidity = assertLineCountValidity;

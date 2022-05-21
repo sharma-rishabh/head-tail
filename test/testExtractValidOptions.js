@@ -3,7 +3,8 @@ const {
   extractValidOption,
   validateOptions,
   areAllSwitchesSame,
-  assertSwitchesValidity
+  assertSwitchesValidity,
+  assertLineCountValidity
 } = require('../src/extractValidOption.js');
 
 describe('extractValidOption', () => {
@@ -52,6 +53,19 @@ describe('assertSwitchesValidity', () => {
       name: 'invalidSwitch',
       message: 'head:illegal option --d',
       option: '-d'
+    });
+  });
+});
+
+describe('assertLineCountValidity', () => {
+  it('should not throw an error if line count is valid.', () => {
+    return assert.ok(assertLineCountValidity({ option: '-n', count: '10' }));
+  });
+  it('should throw throw an error if line count is valid.', () => {
+    return assert.throws(() => assertLineCountValidity({ option: '-n', count: 0 }), {
+      name: 'illegalLineCount',
+      message: 'head: illegal line count -- 0',
+      count: 0
     });
   });
 });

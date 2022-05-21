@@ -54,3 +54,5 @@
 - [x] add `validateOptions` in `extractOptions`
 - [x] remove `getFiles`
 - [x] Add extraction of option in `headMain`
+- [x] show appropriate errors through head.js
+- [x] validate line count
