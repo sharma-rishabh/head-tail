@@ -27,7 +27,7 @@ describe('parseArgs', () => {
     );
   });
   it('should throw error if no arguments are passed.', () => {
-    return assert.throws(() => parseArgs(), {
+    return assert.throws(() => parseArgs([]), {
       name: 'noArguments',
       message: 'usage: head [-n lines | -c bytes] [file ...]'
     });

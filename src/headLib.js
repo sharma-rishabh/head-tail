@@ -13,11 +13,9 @@ const head = (content, { count: numOfLines, option }) => {
   return joinBy(requiredContent, separator);
 };
 
-const headMain = (readFile, ...args) => {
-  const { files: [fileName], optionsArray } = parseArgs(args);
-  let content;
+const getFileContent = (readFile, fileName) => {
   try {
-    content = readFile(fileName, 'utf8');
+    return readFile(fileName, 'utf8');
   } catch (error) {
     throw {
       name: 'fileReadError',
@@ -25,6 +23,11 @@ const headMain = (readFile, ...args) => {
       fileName
     };
   }
+};
+
+const headMain = (readFile, ...args) => {
+  const { files: [fileName], optionsArray } = parseArgs(args);
+  const content = getFileContent(readFile, fileName);
   return head(content, extractValidOption(optionsArray));
 };
 
@@ -33,3 +36,4 @@ exports.splitBy = splitBy;
 exports.joinBy = joinBy;
 exports.head = head;
 exports.headMain = headMain;
+exports.getFileContent = getFileContent;

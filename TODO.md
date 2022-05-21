@@ -1,6 +1,5 @@
 **TODO**
 
-- [ ] pull readFile try catch out of main.
 - [ ] Make headMain for multiple files.
 - [ ] Implement `parseArgs`.
   - [x] should give default options if no cl options are passed.
@@ -59,3 +58,4 @@
 - [x] validate line count
 - [x] show usage if no arguments are provided.
 - [x] fix error format for read file errors
+- [x] pull readFile try catch out of main.

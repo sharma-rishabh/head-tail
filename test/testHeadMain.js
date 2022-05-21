@@ -1,4 +1,4 @@
-const { headMain } = require('../src/headLib.js');
+const { headMain, getFileContent } = require('../src/headLib.js');
 const assert = require('assert');
 
 const mockReadFile = (expectedFileName, content) => {
@@ -21,6 +21,26 @@ describe('headMain', () => {
   it('should throw an error if file is not present.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
     return assert.throws(() => headMain(mockedReadFile, 'b.txt'), {
+      name: 'fileReadError', message: 'head: b.txt: No such file or directory', fileName: 'b.txt'
+    });
+  });
+  it('should throw an error if no arguments are present.', () => {
+    const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
+    return assert.throws(() => headMain(mockedReadFile), {
+      name: 'noArguments',
+      message: 'usage: head [-n lines | -c bytes] [file ...]'
+    });
+  });
+});
+
+describe('getFileContent', () => {
+  it('should return file content if file exists.', () => {
+    const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
+    return assert.strictEqual(getFileContent(mockedReadFile, 'a.txt'), 'a\nb\nc');
+  });
+  it('should throw error if file is invalid.', () => {
+    const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
+    return assert.throws(() => getFileContent(mockedReadFile, 'b.txt'), {
       name: 'fileReadError', message: 'head: b.txt: No such file or directory', fileName: 'b.txt'
     });
   });

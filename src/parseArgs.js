@@ -3,7 +3,7 @@ const isOption = (option) => {
 };
 
 const assertArgumentsValidity = (args) => {
-  if (args === undefined) {
+  if (args.length === 0) {
     throw {
       name: 'noArguments',
       message: 'usage: head [-n lines | -c bytes] [file ...]'
