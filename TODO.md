@@ -2,7 +2,6 @@
 
 - [ ] add `areSwitchesValid` and `areAllSwitchesSame` to `validateOptions`
 - [ ] Add extraction of option in `headMain`
-- [ ] Implement `areSwitchValid`
 - [ ] remove `getFiles`
 - [ ] Make headMain for multiple files.
 - [ ] Implement `parseArgs`.
@@ -53,3 +52,4 @@
 - [x] Implement `extractValidOption`
 - [x] Implement `validateOptions`
 - [x] Implement `areAllSwitchesSame`
+- [x] Implement `assertSwitchesValidity`
