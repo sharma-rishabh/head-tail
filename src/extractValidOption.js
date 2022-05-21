@@ -27,8 +27,6 @@ const assertSwitchesValidity = (options) => {
   return true;
 };
 
-const extractValidOption = (options) => options[options.length - 1];
-
 const validateOptions = (options) => {
   assertSwitchesValidity(options);
   if (!areAllSwitchesSame(options)) {
@@ -38,6 +36,11 @@ const validateOptions = (options) => {
     };
   }
   return options;
+};
+
+const extractValidOption = (options) => {
+  validateOptions(options);
+  return options[options.length - 1];
 };
 
 exports.extractValidOption = extractValidOption;
