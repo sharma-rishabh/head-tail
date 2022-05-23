@@ -1,3 +1,5 @@
+## Head
+
 `usage: head [-n lines | -c bytes] [file ...]`
 
 ```
@@ -9,4 +11,19 @@ head -n count file
 
 head -c bytes file
   Specify the bytes/characters you want from a file.
+```
+
+## Tail
+
+`usage: tail [-c # | -n #] [file ...]`
+
+```
+tail file
+  This filter displays the last ten of the specified file.
+
+tail -n count file
+  Specify the line from which you want the content.
+
+tail -c count file
+  Specify the byte/count from which you want the content.
 ```

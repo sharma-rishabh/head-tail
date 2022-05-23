@@ -1,5 +1,8 @@
 **TODO**
 
+- [ ] create a `testTailLib.js`
+- [ ] create a `tailLib.js`.
+- [ ] implement `tail`
 - [ ] Extract testHeadFiles in a separate functions.
 
 **MAYBE**
@@ -74,3 +77,4 @@
 - [x] Make headMain for multiple files.
 - [x] Make `-num` special option work.
 - [x] Give appropriate error if byte count is invalid.
+- [x] update `readme` with tail contract
