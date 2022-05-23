@@ -7,6 +7,19 @@ const isOptionIntegrated = (flag) => {
   return endWithDigits.test(flag);
 };
 
+const parseOption = (probableOption, probableCount) => {
+  if (isOptionIntegrated(probableOption)) {
+    return {
+      option: extractOption(probableOption),
+      count: extractCount(probableOption)
+    };
+  }
+  return {
+    option: probableOption,
+    count: +probableCount
+  };
+};
+
 const extractOption = (integratedOption) => integratedOption.slice(0, 2);
 const extractCount = (integratedOption) => +integratedOption.slice(2);
 
@@ -35,3 +48,4 @@ const parseArgs = (args) => {
 };
 
 exports.parseArgs = parseArgs;
+exports.parseOption = parseOption;
