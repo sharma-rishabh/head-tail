@@ -37,9 +37,10 @@ const getFileContent = (readFile, fileName) => {
 
 const headMain = (readFile, ...args) => {
   const { files, optionsArray } = parseArgs(args);
+  const option = extractValidOption(optionsArray);
   assertFileExistence(files);
   const content = getFileContent(readFile, files[0]);
-  return head(content, extractValidOption(optionsArray));
+  return head(content, option);
 };
 
 exports.extractData = extractData;

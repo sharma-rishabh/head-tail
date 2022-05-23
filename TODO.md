@@ -1,5 +1,6 @@
 **TODO**
 
+- [ ] make a `parseOption` function.
 - [ ] Make headMain for multiple files.
 
 **MAYBE**
@@ -62,3 +63,4 @@
   - [x] should work with `-ccount`
 - [x] Assert files existence.
 - [x] Remove `assertArgumentValidity`
+- [x] Add more validation for line count.

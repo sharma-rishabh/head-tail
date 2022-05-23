@@ -68,4 +68,11 @@ describe('assertLineCountValidity', () => {
       count: 0
     });
   });
+  it('should throw throw an error if line count is not present.', () => {
+    return assert.throws(() => assertLineCountValidity({ option: '-n', count: NaN }), {
+      name: 'illegalLineCount',
+      message: 'head: illegal line count -- NaN',
+      count: NaN
+    });
+  });
 });

@@ -40,7 +40,7 @@ const validateOptions = (options) => {
 };
 
 const assertLineCountValidity = (option) => {
-  if (option.count < 1) {
+  if (option.count < 1 || isNaN(option.count)) {
     throw {
       name: 'illegalLineCount',
       message: `head: illegal line count -- ${option.count}`,
