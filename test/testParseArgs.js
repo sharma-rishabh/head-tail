@@ -41,4 +41,7 @@ describe('parseOption', () => {
   it('should parse an option if they are integrated', () => {
     return assert.deepStrictEqual(parseOption('-n50', 'a.txt'), { option: '-n', count: 50 });
   });
+  it('should parse an option if it is special', () => {
+    return assert.deepStrictEqual(parseOption('-5', 'a.txt'), { option: '-n', count: 5 });
+  });
 });

@@ -2,12 +2,23 @@ const isOption = (option) => {
   return option.startsWith('-');
 };
 
+const isSpecialOption = (flag) => {
+  const hasAllDigits = /^-\d+$/;
+  return hasAllDigits.test(flag);
+};
+
 const isOptionIntegrated = (flag) => {
   const endWithDigits = /\d$/;
   return endWithDigits.test(flag);
 };
 
 const parseOption = (option, probableCount) => {
+  if (isSpecialOption(option)) {
+    return {
+      option: '-n',
+      count: +option.slice(1)
+    };
+  }
   if (isOptionIntegrated(option)) {
     return {
       option: extractOption(option),

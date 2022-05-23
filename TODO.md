@@ -72,3 +72,4 @@
 - [x] implement `formatOutput`
 - [x] implement `headMultipleFiles`
 - [x] Make headMain for multiple files.
+- [x] Make `-num` special option work.
