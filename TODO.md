@@ -83,3 +83,4 @@
 - [x] Extract throw objects to functions.
 - [x] Change contract of `headMultipleFiles` to accept a formatter.
 - [x] Extract `testFileUtils` in a separate functions.
+- [x] get rid of unnecessary code.

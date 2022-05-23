@@ -26,13 +26,6 @@ const formatOutput = (fileContent, fileName) => {
   return `==> ${fileName} <==\n${fileContent}\n`;
 };
 
-const headSingleFile = ([fileName], readFile, { count, option }) => {
-  const separator = getSeparator(option);
-  const fileContent = getFileContent(readFile, fileName);
-  const content = head(fileContent, count, separator);
-  return [{ content, isError: false }];
-};
-
 const headMultipleFiles = (files, readFile, { option, count }, formatter) => {
   const separator = getSeparator(option);
   return files.map((file) => {
@@ -72,6 +65,5 @@ exports.headMain = headMain;
 exports.getSeparator = getSeparator;
 exports.getFileContent = getFileContent;
 exports.assertFileExistence = assertFileExistence;
-exports.headSingleFile = headSingleFile;
 exports.headMultipleFiles = headMultipleFiles;
 exports.formatOutput = formatOutput;

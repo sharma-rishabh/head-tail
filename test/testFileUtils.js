@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { assertFileExistence, getFileContent, headSingleFile, headMultipleFiles, formatOutput } = require('../src/headLib.js');
+const { assertFileExistence, getFileContent, headMultipleFiles, formatOutput } = require('../src/headLib.js');
 
 const mockReadFile = (expectedFileName, content) => {
   return (fileName, encoding) => {
@@ -42,19 +42,6 @@ describe('assertFileExistence', () => {
       name: 'noFile',
       message: 'usage: head [-n lines | -c bytes] [file ...]'
     });
-  });
-});
-
-describe('headSingleFile', () => {
-  it('should return head of a single file.', () => {
-    const mockedReadFile = mockReadFile('a.txt', '1\n2\n3');
-    const option = { option: '-n', count: 2 };
-    return assert.deepStrictEqual(headSingleFile(['a.txt'], mockedReadFile, option), [{ content: '1\n2', isError: false }]);
-  });
-  it('should return error if file doesn\'t exist.', () => {
-    const mockedReadFile = mockReadFile('a.txt', '1\n2\n3');
-    const option = { option: '-n', count: 2 };
-    return assert.throws(() => headSingleFile(['b.txt'], mockedReadFile, option));
   });
 });
 
