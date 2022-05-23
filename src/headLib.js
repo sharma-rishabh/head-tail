@@ -7,6 +7,7 @@ const { noFile, fileReadError } = require('./throwFunctions.js');
 const extractData = (array, numOfElements) => array.slice(0, numOfElements);
 
 const getSeparator = (option) => option === '-n' ? '\n' : '';
+const identity = (content) => content;
 
 const head = (content, numOfLines, separator) => {
   const splitContent = splitBy(content, separator);
@@ -32,13 +33,13 @@ const headSingleFile = ([fileName], readFile, { count, option }) => {
   return [{ content, isError: false }];
 };
 
-const headMultipleFiles = (files, readFile, { option, count }) => {
+const headMultipleFiles = (files, readFile, { option, count }, formatter) => {
   const separator = getSeparator(option);
   return files.map((file) => {
     try {
       const fileContent = getFileContent(readFile, file);
       const headedContent = head(fileContent, count, separator);
-      const content = formatOutput(headedContent, file);
+      const content = formatter(headedContent, file);
       return { content, isError: false };
     } catch (error) {
       const content = error.message;
@@ -60,8 +61,8 @@ const headMain = (readFile, log, error, ...args) => {
   const { files, optionsArray } = parseArgs(args);
   const option = extractValidOption(optionsArray);
   assertFileExistence(files);
-  const headFiles = files.length > 1 ? headMultipleFiles : headSingleFile;
-  const headedContent = headFiles(files, readFile, option);
+  const formatter = files.length > 1 ? formatOutput : identity;
+  const headedContent = headMultipleFiles(files, readFile, option, formatter);
   printContent(headedContent, log, error);
 };
 

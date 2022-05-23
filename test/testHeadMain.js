@@ -63,11 +63,9 @@ describe('headMain', () => {
   });
   it('should throw an error if file is not present.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
-    const mockedLog = mockLogger(['a\nb']);
-    const mockedError = mockError([]);
-    return assert.throws(() => headMain(mockedReadFile, mockedLog, mockedError, 'b.txt'), {
-      name: 'fileReadError', message: 'head: b.txt: No such file or directory', fileName: 'b.txt'
-    });
+    const mockedLog = mockLogger([]);
+    const mockedError = mockError(['head: b.txt: No such file or directory']);
+    return assert.throws(() => headMain(mockedReadFile, mockedLog, mockedError, 'b.txt'), undefined);
   });
   it('should throw an error if no files are present.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');

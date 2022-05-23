@@ -67,7 +67,7 @@ describe('headMultipleFiles', () => {
       { content: '==> b.txt <==\na\n', isError: false }
     ];
     const option = { option: '-n', count: 10 };
-    return assert.deepStrictEqual(headMultipleFiles(files, mockedReadFile, option), expected);
+    return assert.deepStrictEqual(headMultipleFiles(files, mockedReadFile, option, formatOutput), expected);
   });
   it('should do head of multiple files and give error if some files don\'t exist', () => {
     const mockedReadFile = mockRFSMultiFile(['a.txt', 'b.txt'], ['a\nb', 'a']);
@@ -78,7 +78,7 @@ describe('headMultipleFiles', () => {
       { content: '==> b.txt <==\na\n', isError: false }
     ];
     const option = { option: '-n', count: 10 };
-    return assert.deepStrictEqual(headMultipleFiles(files, mockedReadFile, option), expected);
+    return assert.deepStrictEqual(headMultipleFiles(files, mockedReadFile, option, formatOutput), expected);
   });
 });
 
