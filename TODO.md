@@ -1,7 +1,6 @@
 **TODO**
 
 - [ ] Change contract of `headMultipleFiles` to accept a formatter.
-- [ ] Extract throw objects to functions.
 - [ ] Extract `testFileUtils` in a separate functions.
 
 **MAYBE**
@@ -83,3 +82,4 @@
 - [x] implement `tail`
 - [x] Extract `stringUtils`
 - ~~[ ] Extract `fileUtils`~~
+- [x] Extract throw objects to functions.

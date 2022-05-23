@@ -2,6 +2,7 @@ const { parseArgs } = require('./parseArgs.js');
 const { extractValidOption } = require('./extractValidOption.js');
 const { printContent } = require('./printContent.js');
 const { splitBy, joinBy } = require('./stringUtils.js');
+const { noFile, fileReadError } = require('./throwFunctions.js');
 
 const extractData = (array, numOfElements) => array.slice(0, numOfElements);
 
@@ -15,10 +16,7 @@ const head = (content, numOfLines, separator) => {
 
 const assertFileExistence = (fileArray) => {
   if (fileArray.length === 0) {
-    throw {
-      name: 'noFile',
-      message: 'usage: head [-n lines | -c bytes] [file ...]'
-    };
+    throw noFile();
   }
   return true;
 };
@@ -54,11 +52,7 @@ const getFileContent = (readFile, fileName) => {
   try {
     return readFile(fileName, 'utf8');
   } catch (error) {
-    throw {
-      name: 'fileReadError',
-      message: `head: ${fileName}: No such file or directory`,
-      fileName
-    };
+    throw fileReadError(fileName);
   }
 };
 

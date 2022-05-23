@@ -1,3 +1,8 @@
+const { differentOptions,
+  invalidSwitch,
+  illegalLineCount
+} = require('./throwFunctions.js');
+
 const switchSameAsPrev = ({ prevOption, sameAsPrev }, { option }) => {
   return {
     sameAsPrev: prevOption === option && sameAsPrev,
@@ -17,12 +22,7 @@ const assertSwitchesValidity = (options) => {
   for (let index = 0; index < options.length; index++) {
     const option = options[index];
     if (!validOptions.includes(option.option)) {
-      throw {
-        name: 'invalidSwitch',
-        message: `head:illegal option -${option.option}
-usage: head [-n lines | -c bytes] [file ...]`,
-        option: option.option
-      };
+      throw invalidSwitch(option.option);
     }
   }
   return true;
@@ -31,10 +31,7 @@ usage: head [-n lines | -c bytes] [file ...]`,
 const validateOptions = (options) => {
   assertSwitchesValidity(options);
   if (!areAllSwitchesSame(options)) {
-    throw {
-      name: 'differentOptions',
-      message: 'head:can\'t combine line and byte counts'
-    };
+    throw differentOptions();
   }
   return options;
 };
@@ -42,11 +39,7 @@ const validateOptions = (options) => {
 const assertLineCountValidity = (option) => {
   const optionName = option.option === '-n' ? 'line' : 'byte';
   if (option.count < 1 || isNaN(option.count)) {
-    throw {
-      name: `illegal${optionName}Count`,
-      message: `head: illegal ${optionName} count -- ${option.count}`,
-      count: option.count
-    };
+    throw illegalLineCount(optionName, option.count);
   }
   return true;
 };
