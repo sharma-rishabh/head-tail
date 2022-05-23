@@ -55,6 +55,12 @@ describe('headMain', () => {
     const mockedError = mockError([]);
     return assert.strictEqual(headMain(mockedReadFile, mockedLog, mockedError, '-n', '2', 'a.txt'), undefined);
   });
+  it('should take multiple files and apply head on them.', () => {
+    const mockedReadFile = mockRFSMultiFile(['a.txt', 'b.txt'], ['a\nb', 'a']);
+    const mockedLog = mockLogger(['==> a.txt <==\na\nb\n', '==> b.txt <==\na\n']);
+    const mockedError = mockError([]);
+    return assert.strictEqual(headMain(mockedReadFile, mockedLog, mockedError, '-n', '2', 'a.txt', 'b.txt'), undefined);
+  });
   it('should throw an error if file is not present.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
     const mockedLog = mockLogger(['a\nb']);
@@ -112,7 +118,7 @@ describe('headSingleFile', () => {
 
 describe('headMultipleFiles', () => {
   it('should do head of multiple files', () => {
-    const mockedReadFile = mockRFSMultiFile(['a.txt', 'b.txt'], ['a\nb', 'a'])
+    const mockedReadFile = mockRFSMultiFile(['a.txt', 'b.txt'], ['a\nb', 'a']);
     const files = ['a.txt', 'b.txt'];
     const expected = [
       { content: '==> a.txt <==\na\nb\n', isError: false },
@@ -122,7 +128,7 @@ describe('headMultipleFiles', () => {
     return assert.deepStrictEqual(headMultipleFiles(files, mockedReadFile, option), expected);
   });
   it('should do head of multiple files and give error if some files don\'t exist', () => {
-    const mockedReadFile = mockRFSMultiFile(['a.txt', 'b.txt'], ['a\nb', 'a'])
+    const mockedReadFile = mockRFSMultiFile(['a.txt', 'b.txt'], ['a\nb', 'a']);
     const files = ['a.txt', 'c.txt', 'b.txt'];
     const expected = [
       { content: '==> a.txt <==\na\nb\n', isError: false },

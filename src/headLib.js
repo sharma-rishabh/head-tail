@@ -68,7 +68,8 @@ const headMain = (readFile, log, error, ...args) => {
   const { files, optionsArray } = parseArgs(args);
   const option = extractValidOption(optionsArray);
   assertFileExistence(files);
-  const headedContent = headSingleFile(files, readFile, option);
+  const headFiles = files.length > 1 ? headMultipleFiles : headSingleFile;
+  const headedContent = headFiles(files, readFile, option);
   printContent(headedContent, log, error);
 };
 

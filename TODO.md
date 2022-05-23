@@ -1,6 +1,6 @@
 **TODO**
 
-- [ ] Make headMain for multiple files.
+- [ ] Extract testHeadFiles in a separate functions.
 
 **MAYBE**
 
@@ -71,3 +71,4 @@
 - [x] change contract of `headMain`
 - [x] implement `formatOutput`
 - [x] implement `headMultipleFiles`
+- [x] Make headMain for multiple files.
