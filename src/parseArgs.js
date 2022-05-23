@@ -27,18 +27,9 @@ const parseArgs = (args) => {
   let index = 0;
   const optionsArray = [];
   while (index < args.length && isOption(args[index])) {
-    let option;
-    let count;
-    if (isOptionIntegrated(args[index])) {
-      option = extractOption(args[index]);
-      count = extractCount(args[index]);
-    } else {
-      option = args[index];
-      count = +args[index + 1];
-      index++;
-    }
-    optionsArray.push({ option, count });
-    index++;
+    const currentOption = parseOption(args[index], args[index + 1]);
+    optionsArray.push(currentOption);
+    index += isOptionIntegrated(args[index]) ? 1 : 2;
   }
   const files = args.slice(index);
   if (optionsArray.length === 0) {
