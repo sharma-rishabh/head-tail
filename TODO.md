@@ -1,6 +1,5 @@
 **TODO**
 
-- [ ] implement `headMultipleFiles`
 - [ ] Make headMain for multiple files.
 
 **MAYBE**
@@ -71,3 +70,4 @@
 - [x] change contract of `head` to accept a separator.
 - [x] change contract of `headMain`
 - [x] implement `formatOutput`
+- [x] implement `headMultipleFiles`

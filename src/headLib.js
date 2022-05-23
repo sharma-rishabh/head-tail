@@ -36,6 +36,22 @@ const headSingleFile = ([fileName], readFile, { count, option }) => {
   return [{ content, isError: false }];
 };
 
+const headMultipleFiles = (files, readFile, { option, count }) => {
+  const separator = getSeparator(option);
+  return files.map((file) => {
+    try {
+      const fileContent = getFileContent(readFile, file);
+      const headedContent = head(fileContent, count, separator);
+      const content = formatOutput(headedContent, file);
+      return { content, isError: false };
+    } catch (error) {
+      const content = error.message;
+      const isError = true;
+      return { content, isError };
+    }
+  });
+};
+
 const getFileContent = (readFile, fileName) => {
   try {
     return readFile(fileName, 'utf8');
@@ -65,3 +81,4 @@ exports.getFileContent = getFileContent;
 exports.assertFileExistence = assertFileExistence;
 exports.headSingleFile = headSingleFile;
 exports.formatOutput = formatOutput;
+exports.headMultipleFiles = headMultipleFiles;
