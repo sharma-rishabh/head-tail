@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { extractData, splitBy, joinBy, head } = require('../src/headLib.js');
+const { extractData, splitBy, joinBy, head, formatOutput } = require('../src/headLib.js');
 
 describe('extractData', () => {
   it('should give array back if array length is equal to specified count.',
@@ -78,5 +78,11 @@ describe('head', () => {
     return assert.strictEqual(head(
       'ab', 1, ''), 'a'
     );
+  });
+});
+
+describe('formatOutput', () => {
+  it('Should add a header to a file content', () => {
+    return assert.strictEqual(formatOutput('a\nb', 'a.txt'), '==> a.txt <==\na\nb\n');
   });
 });

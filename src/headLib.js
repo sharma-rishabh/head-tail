@@ -7,6 +7,8 @@ const joinBy = (array, connector) => array.join(connector);
 
 const extractData = (array, numOfElements) => array.slice(0, numOfElements);
 
+const getSeparator = (option) => option === '-n' ? '\n' : '';
+
 const head = (content, numOfLines, separator) => {
   const splitContent = splitBy(content, separator);
   const requiredContent = extractData(splitContent, numOfLines);
@@ -23,8 +25,12 @@ const assertFileExistence = (fileArray) => {
   return true;
 };
 
+const formatOutput = (fileContent, fileName) => {
+  return `==> ${fileName} <==\n${fileContent}\n`;
+};
+
 const headSingleFile = ([fileName], readFile, { count, option }) => {
-  const separator = option === '-n' ? '\n' : '';
+  const separator = getSeparator(option);
   const fileContent = getFileContent(readFile, fileName);
   const content = head(fileContent, count, separator);
   return [{ content, isError: false }];
@@ -58,3 +64,4 @@ exports.headMain = headMain;
 exports.getFileContent = getFileContent;
 exports.assertFileExistence = assertFileExistence;
 exports.headSingleFile = headSingleFile;
+exports.formatOutput = formatOutput;

@@ -70,3 +70,4 @@
 - [x] implement `headSingleFile`
 - [x] change contract of `head` to accept a separator.
 - [x] change contract of `headMain`
+- [x] implement `formatOutput`
