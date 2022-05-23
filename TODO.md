@@ -1,7 +1,7 @@
 **TODO**
 
+- [ ] change contract of `head` to accept a separator.
 - [ ] implement `headMultipleFiles`
-- [ ] implement `headSingleFile`
 - [ ] Make headMain for multiple files.
 
 **MAYBE**
@@ -68,3 +68,4 @@
 - [x] make a `parseOption` function.
 - [x] Add `parseOption` in `parseArgs`
 - [x] implement `printContent`
+- [x] implement `headSingleFile`

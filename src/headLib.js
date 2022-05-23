@@ -23,6 +23,12 @@ const assertFileExistence = (fileArray) => {
   return true;
 };
 
+const headSingleFile = ([fileName], readFile, option) => {
+  const fileContent = getFileContent(readFile, fileName);
+  const content = head(fileContent, option);
+  return [{ content, isError: false }];
+};
+
 const getFileContent = (readFile, fileName) => {
   try {
     return readFile(fileName, 'utf8');
@@ -50,3 +56,4 @@ exports.head = head;
 exports.headMain = headMain;
 exports.getFileContent = getFileContent;
 exports.assertFileExistence = assertFileExistence;
+exports.headSingleFile = headSingleFile;
