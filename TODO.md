@@ -1,5 +1,7 @@
 **TODO**
 
+- [ ] implement `headMultipleFiles`
+- [ ] implement `headSingleFile`
 - [ ] Make headMain for multiple files.
 
 **MAYBE**
@@ -65,3 +67,4 @@
 - [x] Add more validation for line count.
 - [x] make a `parseOption` function.
 - [x] Add `parseOption` in `parseArgs`
+- [x] implement `printContent`

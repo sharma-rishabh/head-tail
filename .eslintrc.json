@@ -62,7 +62,7 @@
     "no-implicit-globals": "error",
     "prefer-const": "error",
     "no-magic-numbers": "warn",
-    "no-process-exit": "error",
+    "no-process-exit": "off",
     "no-process-env": "error",
     "no-return-assign": "error",
     "no-useless-return": "error",

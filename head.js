@@ -7,6 +7,7 @@ const main = () => {
     log(headMain(fs.readFileSync, ...process.argv.slice(2)));
   } catch (err) {
     error(err.message);
+    process.exit(1);
   }
 };
 

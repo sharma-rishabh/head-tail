@@ -7,15 +7,15 @@ const isOptionIntegrated = (flag) => {
   return endWithDigits.test(flag);
 };
 
-const parseOption = (probableOption, probableCount) => {
-  if (isOptionIntegrated(probableOption)) {
+const parseOption = (option, probableCount) => {
+  if (isOptionIntegrated(option)) {
     return {
-      option: extractOption(probableOption),
-      count: extractCount(probableOption)
+      option: extractOption(option),
+      count: extractCount(option)
     };
   }
   return {
-    option: probableOption,
+    option: option,
     count: +probableCount
   };
 };
@@ -26,15 +26,19 @@ const extractCount = (integratedOption) => +integratedOption.slice(2);
 const parseArgs = (args) => {
   let index = 0;
   const optionsArray = [];
+
   while (index < args.length && isOption(args[index])) {
     const currentOption = parseOption(args[index], args[index + 1]);
     optionsArray.push(currentOption);
     index += isOptionIntegrated(args[index]) ? 1 : 2;
   }
+
   const files = args.slice(index);
+
   if (optionsArray.length === 0) {
     optionsArray.push({ option: '-n', count: 10 });
   }
+
   return { files, optionsArray };
 };
 
