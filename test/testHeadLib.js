@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { extractData, splitBy, joinBy, head, formatOutput } = require('../src/headLib.js');
+const { extractData, head } = require('../src/headLib.js');
 
 describe('extractData', () => {
   it('should give array back if array length is equal to specified count.',
@@ -26,24 +26,6 @@ describe('extractData', () => {
       return assert.deepStrictEqual(extractData(array, 1), expectedArray);
     }
   );
-});
-
-describe('splitBy', () => {
-  it('should split content by \n', () => {
-    return assert.deepStrictEqual(splitBy('a\nb', '\n'), ['a', 'b']);
-  });
-  it('should split content by the given separator.', () => {
-    return assert.deepStrictEqual(splitBy('a\nb', ''), ['a', '\n', 'b']);
-  });
-});
-
-describe('joinBy', () => {
-  it('should join given array with \n', () => {
-    return assert.strictEqual(joinBy(['a', 'b'], '\n'), 'a\nb');
-  });
-  it('should join content by the given connector.', () => {
-    return assert.deepStrictEqual(joinBy(['a', 'b'], ''), 'ab');
-  });
 });
 
 describe('head', () => {
@@ -78,11 +60,5 @@ describe('head', () => {
     return assert.strictEqual(head(
       'ab', 1, ''), 'a'
     );
-  });
-});
-
-describe('formatOutput', () => {
-  it('Should add a header to a file content', () => {
-    return assert.strictEqual(formatOutput('a\nb', 'a.txt'), '==> a.txt <==\na\nb\n');
   });
 });

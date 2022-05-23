@@ -72,12 +72,11 @@ const headMain = (readFile, log, error, ...args) => {
 };
 
 exports.extractData = extractData;
-exports.splitBy = splitBy;
-exports.joinBy = joinBy;
 exports.head = head;
 exports.headMain = headMain;
+exports.getSeparator = getSeparator;
 exports.getFileContent = getFileContent;
 exports.assertFileExistence = assertFileExistence;
 exports.headSingleFile = headSingleFile;
-exports.formatOutput = formatOutput;
 exports.headMultipleFiles = headMultipleFiles;
+exports.formatOutput = formatOutput;

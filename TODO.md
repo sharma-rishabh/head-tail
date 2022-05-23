@@ -1,10 +1,12 @@
 **TODO**
 
-- [ ] Extract `fileUtils`
+- [ ] Change contract of `headMultipleFiles` to accept a formatter.
+- [ ] Extract throw objects to functions.
 - [ ] Extract `testFileUtils` in a separate functions.
 
 **MAYBE**
 
+- [ ] Consider changing contract of parse args to not convert to number.
 
 **DONE**
 
@@ -80,3 +82,4 @@
 - [x] create a `tailLib.js`.
 - [x] implement `tail`
 - [x] Extract `stringUtils`
+- ~~[ ] Extract `fileUtils`~~
