@@ -32,10 +32,4 @@ describe('parseArgs', () => {
       { files: ['a.txt'], optionsArray: [{ option: '-n', count: 20 }, { option: '-n', count: 10 }] }
     );
   });
-  it('should throw error if no arguments are passed.', () => {
-    return assert.throws(() => parseArgs([]), {
-      name: 'noArguments',
-      message: 'usage: head [-n lines | -c bytes] [file ...]'
-    });
-  });
 });

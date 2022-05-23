@@ -24,10 +24,10 @@ describe('headMain', () => {
       name: 'fileReadError', message: 'head: b.txt: No such file or directory', fileName: 'b.txt'
     });
   });
-  it('should throw an error if no arguments are present.', () => {
+  it('should throw an error if no files are present.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
     return assert.throws(() => headMain(mockedReadFile), {
-      name: 'noArguments',
+      name: 'noFile',
       message: 'usage: head [-n lines | -c bytes] [file ...]'
     });
   });

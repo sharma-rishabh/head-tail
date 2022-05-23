@@ -7,21 +7,10 @@ const isOptionIntegrated = (flag) => {
   return endWithDigits.test(flag);
 };
 
-const assertArgumentsValidity = (args) => {
-  if (args.length === 0) {
-    throw {
-      name: 'noArguments',
-      message: 'usage: head [-n lines | -c bytes] [file ...]'
-    };
-  }
-  return true;
-};
-
 const extractOption = (integratedOption) => integratedOption.slice(0, 2);
 const extractCount = (integratedOption) => +integratedOption.slice(2);
 
 const parseArgs = (args) => {
-  assertArgumentsValidity(args);
   let index = 0;
   const optionsArray = [];
   while (index < args.length && isOption(args[index])) {
