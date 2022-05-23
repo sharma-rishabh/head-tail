@@ -1,6 +1,7 @@
 **TODO**
 
-- [ ] Extract testHeadFiles in a separate functions.
+- [ ] Extract `fileUtils`
+- [ ] Extract `testFileUtils` in a separate functions.
 
 **MAYBE**
 
@@ -78,3 +79,4 @@
 - [x] create a `testTailLib.js`
 - [x] create a `tailLib.js`.
 - [x] implement `tail`
+- [x] Extract `stringUtils`

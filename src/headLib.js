@@ -1,9 +1,7 @@
 const { parseArgs } = require('./parseArgs.js');
 const { extractValidOption } = require('./extractValidOption.js');
 const { printContent } = require('./printContent.js');
-
-const splitBy = (content, separator) => content.split(separator);
-const joinBy = (array, connector) => array.join(connector);
+const { splitBy, joinBy } = require('./stringUtils.js');
 
 const extractData = (array, numOfElements) => array.slice(0, numOfElements);
 
