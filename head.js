@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const main = () => {
   try {
-    log(headMain(fs.readFileSync, ...process.argv.slice(2)));
+    headMain(fs.readFileSync, log, error, ...process.argv.slice(2));
   } catch (err) {
     error(err.message);
     process.exit(1);

@@ -9,18 +9,46 @@ const mockReadFile = (expectedFileName, content) => {
   };
 };
 
+const mockLogger = (contents) => {
+  let index = 0;
+  const log = (content) => {
+    assert.equal(content, contents[index]);
+    log.count++;
+    index++;
+  };
+  log.count = 0;
+  return log;
+};
+
+const mockError = (contents) => {
+  let index = 0;
+  const error = (content) => {
+    assert.equal(content, contents[index]);
+    error.count++;
+    index++;
+  };
+  error.count = 0;
+  return error;
+};
+
 describe('headMain', () => {
   it('should take file from main and pass the content to head.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb');
-    return assert.strictEqual(headMain(mockedReadFile, 'a.txt'), 'a\nb');
+    const mockedLog = mockLogger(['a\nb']);
+    const mockedError = mockError([]);
+    return assert.strictEqual(headMain(mockedReadFile, mockedLog, mockedError, 'a.txt'), undefined);
   });
   it('should take cl options and parse them as options object.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
-    return assert.strictEqual(headMain(mockedReadFile, '-n', '2', 'a.txt'), 'a\nb');
+    const mockedLog = mockLogger(['a\nb']);
+    const mockedError = mockError([]);
+    return assert.strictEqual(headMain(mockedReadFile, mockedLog, mockedError, '-n', '2', 'a.txt'), undefined);
   });
   it('should throw an error if file is not present.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
-    return assert.throws(() => headMain(mockedReadFile, 'b.txt'), {
+    const mockedLog = mockLogger(['a\nb']);
+    const mockedError = mockError([]);
+    return assert.throws(() => headMain(mockedReadFile, mockedLog, mockedError, 'b.txt'), {
       name: 'fileReadError', message: 'head: b.txt: No such file or directory', fileName: 'b.txt'
     });
   });

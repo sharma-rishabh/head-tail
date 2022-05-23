@@ -1,13 +1,13 @@
 const { parseArgs } = require('./parseArgs.js');
 const { extractValidOption } = require('./extractValidOption.js');
+const { printContent } = require('./printContent.js');
 
 const splitBy = (content, separator) => content.split(separator);
 const joinBy = (array, connector) => array.join(connector);
 
 const extractData = (array, numOfElements) => array.slice(0, numOfElements);
 
-const head = (content, { count: numOfLines, option }) => {
-  const separator = option === '-n' ? '\n' : '';
+const head = (content, numOfLines, separator) => {
   const splitContent = splitBy(content, separator);
   const requiredContent = extractData(splitContent, numOfLines);
   return joinBy(requiredContent, separator);
@@ -23,9 +23,10 @@ const assertFileExistence = (fileArray) => {
   return true;
 };
 
-const headSingleFile = ([fileName], readFile, option) => {
+const headSingleFile = ([fileName], readFile, { count, option }) => {
+  const separator = option === '-n' ? '\n' : '';
   const fileContent = getFileContent(readFile, fileName);
-  const content = head(fileContent, option);
+  const content = head(fileContent, count, separator);
   return [{ content, isError: false }];
 };
 
@@ -41,12 +42,12 @@ const getFileContent = (readFile, fileName) => {
   }
 };
 
-const headMain = (readFile, ...args) => {
+const headMain = (readFile, log, error, ...args) => {
   const { files, optionsArray } = parseArgs(args);
   const option = extractValidOption(optionsArray);
   assertFileExistence(files);
-  const content = getFileContent(readFile, files[0]);
-  return head(content, option);
+  const headedContent = headSingleFile(files, readFile, option);
+  printContent(headedContent, log, error);
 };
 
 exports.extractData = extractData;
