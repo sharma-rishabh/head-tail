@@ -63,14 +63,21 @@ describe('assertLineCountValidity', () => {
   });
   it('should throw throw an error if line count is valid.', () => {
     return assert.throws(() => assertLineCountValidity({ option: '-n', count: 0 }), {
-      name: 'illegalLineCount',
+      name: 'illegallineCount',
       message: 'head: illegal line count -- 0',
+      count: 0
+    });
+  });
+  it('should throw throw an error if byte count is valid.', () => {
+    return assert.throws(() => assertLineCountValidity({ option: '-c', count: 0 }), {
+      name: 'illegalbyteCount',
+      message: 'head: illegal byte count -- 0',
       count: 0
     });
   });
   it('should throw throw an error if line count is not present.', () => {
     return assert.throws(() => assertLineCountValidity({ option: '-n', count: NaN }), {
-      name: 'illegalLineCount',
+      name: 'illegallineCount',
       message: 'head: illegal line count -- NaN',
       count: NaN
     });
