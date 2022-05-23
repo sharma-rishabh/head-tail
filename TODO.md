@@ -1,7 +1,5 @@
 **TODO**
 
-- [ ] create a `testTailLib.js`
-- [ ] create a `tailLib.js`.
 - [ ] implement `tail`
 - [ ] Extract testHeadFiles in a separate functions.
 
@@ -78,3 +76,5 @@
 - [x] Make `-num` special option work.
 - [x] Give appropriate error if byte count is invalid.
 - [x] update `readme` with tail contract
+- [x] create a `testTailLib.js`
+- [x] create a `tailLib.js`.
