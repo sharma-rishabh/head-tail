@@ -1,6 +1,5 @@
 **TODO**
 
-- [ ] implement `tail`
 - [ ] Extract testHeadFiles in a separate functions.
 
 **MAYBE**
@@ -78,3 +77,4 @@
 - [x] update `readme` with tail contract
 - [x] create a `testTailLib.js`
 - [x] create a `tailLib.js`.
+- [x] implement `tail`
