@@ -13,6 +13,16 @@ const head = (content, { count: numOfLines, option }) => {
   return joinBy(requiredContent, separator);
 };
 
+const assertFileExistence = (fileArray) => {
+  if (fileArray.length === 0) {
+    throw {
+      name: 'noFile',
+      message: 'usage: head [-n lines | -c bytes] [file ...]'
+    };
+  }
+  return true;
+};
+
 const getFileContent = (readFile, fileName) => {
   try {
     return readFile(fileName, 'utf8');
@@ -26,8 +36,9 @@ const getFileContent = (readFile, fileName) => {
 };
 
 const headMain = (readFile, ...args) => {
-  const { files: [fileName], optionsArray } = parseArgs(args);
-  const content = getFileContent(readFile, fileName);
+  const { files, optionsArray } = parseArgs(args);
+  assertFileExistence(files);
+  const content = getFileContent(readFile, files[0]);
   return head(content, extractValidOption(optionsArray));
 };
 
@@ -37,3 +48,4 @@ exports.joinBy = joinBy;
 exports.head = head;
 exports.headMain = headMain;
 exports.getFileContent = getFileContent;
+exports.assertFileExistence = assertFileExistence;

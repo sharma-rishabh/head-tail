@@ -1,4 +1,4 @@
-const { headMain, getFileContent } = require('../src/headLib.js');
+const { headMain, getFileContent, assertFileExistence } = require('../src/headLib.js');
 const assert = require('assert');
 
 const mockReadFile = (expectedFileName, content) => {
@@ -42,6 +42,18 @@ describe('getFileContent', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
     return assert.throws(() => getFileContent(mockedReadFile, 'b.txt'), {
       name: 'fileReadError', message: 'head: b.txt: No such file or directory', fileName: 'b.txt'
+    });
+  });
+});
+
+describe('assertFileExistence', () => {
+  it('should not throw an error if there are files in fileArray.', () => {
+    return assert.ok(assertFileExistence(['a.txt']));
+  });
+  it('should throw an error if there are no files in fileArray.', () => {
+    return assert.throws(() => assertFileExistence([]), {
+      name: 'noFile',
+      message: 'usage: head [-n lines | -c bytes] [file ...]'
     });
   });
 });

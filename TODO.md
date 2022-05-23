@@ -1,5 +1,6 @@
 **TODO**
 
+- [ ] Remove `assertArgumentValidity`
 - [ ] Make headMain for multiple files.
 
 **MAYBE**
@@ -60,3 +61,4 @@
   - [x] should work with `-c count `
   - [x] should work with `-ncount`
   - [x] should work with `-ccount`
+- [x] Assert files existence.
