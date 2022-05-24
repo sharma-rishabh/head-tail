@@ -109,3 +109,4 @@
 - [x] Create separate file for `parseTail`.
 - [x] move `parseArgs` to library.
 - [x] Add logic for `+|- num` option in `parseArgs`
+- [x] print correct usage for tail.

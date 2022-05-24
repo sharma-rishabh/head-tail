@@ -108,7 +108,7 @@ describe('parseArgs', () => {
     return assert.throws(() => parseArgs(['-n10', '-c', '10', '-d19', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
       name: 'illegalOption',
       message: `'tail: illegal option -- d
-usage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]`});
+usage: tail [-r] [-q] [-c # | -n #] [file ...]`});
   });
 });
 

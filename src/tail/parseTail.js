@@ -15,7 +15,7 @@ const illegalOptionError = (option) => {
   return {
     name: 'illegalOption',
     message: `'tail: illegal option -- ${flag}
-usage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]`
+usage:tail  [-r] [-q] [-c # | -n #] [file ...] `
   };
 };
 

@@ -109,7 +109,7 @@ describe('parseHyphen', () => {
     return assert.throws(() => parseHyphen(iterableArgs), {
       name: 'illegalOption',
       message: `'tail: illegal option -- p
-usage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]`
+usage: tail [-r] [-q] [-c # | -n #] [file ...]`
     });
   });
 });
