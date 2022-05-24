@@ -4,6 +4,19 @@ const getLegalOptions = () => {
   return ['-n', '-c'];
 };
 
+const getOptionsAndParsers = () => {
+  return [
+    {
+      flag: '-n',
+      parser: parseLineOption
+    },
+    {
+      flag: '-c',
+      parser: parseCountOption
+    }
+  ];
+};
+
 const extractCount = (flag) => {
   return flag.slice(2);
 };
@@ -32,3 +45,4 @@ exports.parseArgs = parseArgs;
 exports.getLegalOptions = getLegalOptions;
 exports.parseLineOption = parseLineOption;
 exports.parseCountOption = parseCountOption;
+exports.getOptionsAndParsers = getOptionsAndParsers;

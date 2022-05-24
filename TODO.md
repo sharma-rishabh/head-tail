@@ -101,3 +101,4 @@
 - [X] implement `getLegalOptions`.
 - [x] implement `parseLineOption`.
 - [x] implement `parseCountOption`.
+- [x] Implement `getOptionsAndParsers`.
