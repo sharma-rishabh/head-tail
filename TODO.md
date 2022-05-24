@@ -3,7 +3,7 @@
 - [ ] make `tail` work for multiple files.
 - [ ] use print functions in tail.
 - [ ] Connect `tail` with cl inputs.
-- [ ] Make parseArgs for tail.
+- [ ] Make `parseArgs` for tail.
 
 **MAYBE**
 
@@ -97,3 +97,4 @@
 - [x] make `testTailMain.js`
 - [x] make `tail` work for a single file.
 - [x] make `createIterator`
+- [x] Implement basic `parseArgs` to work with files.
