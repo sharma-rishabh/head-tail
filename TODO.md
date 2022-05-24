@@ -4,7 +4,6 @@
 - [ ] use print functions in tail.
 - [ ] Connect `tail` with cl inputs.
 - [ ] Make `parseArgs` for tail.
-- [ ] implement `parseCountOption`.
 
 **MAYBE**
 
@@ -101,3 +100,4 @@
 - [x] Implement basic `parseArgs` to work with files.
 - [X] implement `getLegalOptions`.
 - [x] implement `parseLineOption`.
+- [x] implement `parseCountOption`.

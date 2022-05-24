@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { parseArgs, getLegalOptions, parseLineOption } = require('../../src/tail/parseArgs.js');
+const { parseArgs, getLegalOptions, parseLineOption, parseCountOption } = require('../../src/tail/parseArgs.js');
 const { createIterator } = require('../../src/tail/createIterator.js');
 
 describe('parseArgs', () => {
@@ -31,5 +31,22 @@ describe('parseLineOption', () => {
     assert.deepStrictEqual(parseLineOption(iterableArgs), { flag: '-n', count: '+10' });
     iterableArgs.nextElement();
     assert.deepStrictEqual(parseLineOption(iterableArgs), { flag: '-n', count: '-10' });
+  });
+});
+
+describe.only('parseCountOption', () => {
+  it('should parse an option whose values are separate', () => {
+    const iterableArgs = createIterator(['-n', '10']);
+    return assert.deepStrictEqual(parseCountOption(iterableArgs), { flag: '-c', count: '10' });
+  });
+  it('Should parse an option whose values are integrated.', () => {
+    const iterableArgs = createIterator(['-n10']);
+    return assert.deepStrictEqual(parseCountOption(iterableArgs), { flag: '-c', count: '10' });
+  });
+  it('Should preserve signs for count provided by the user.', () => {
+    const iterableArgs = createIterator(['-n+10', '-n-10']);
+    assert.deepStrictEqual(parseCountOption(iterableArgs), { flag: '-c', count: '+10' });
+    iterableArgs.nextElement();
+    assert.deepStrictEqual(parseCountOption(iterableArgs), { flag: '-c', count: '-10' });
   });
 });
