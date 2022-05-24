@@ -3,7 +3,6 @@
 - [ ] make `tail` work for multiple files.
 - [ ] use print functions in tail.
 - [ ] Connect `tail` with cl inputs.
-- [ ] Add logic for `+|- num` option in `parseArgs`
 
 **MAYBE**
 
@@ -109,3 +108,4 @@
 - [x] Add parameter to `parseArgs` to accept allOptions.
 - [x] Create separate file for `parseTail`.
 - [x] move `parseArgs` to library.
+- [x] Add logic for `+|- num` option in `parseArgs`

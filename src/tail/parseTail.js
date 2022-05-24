@@ -2,6 +2,14 @@ const { parseArgs } = require('../lib/parseArgs.js');
 
 const extractFlag = (option) => option.slice(1, 2);
 
+const readFileError = (fileName, message) => {
+  return {
+    name: 'readFileError',
+    message: `tail: ${fileName}:${message}`,
+    fileName
+  };
+};
+
 const illegalOptionError = (option) => {
   const flag = extractFlag(option);
   return {
@@ -20,8 +28,38 @@ const getOptionsAndParsers = () => {
     {
       flag: '-c',
       parser: parseCharOption
+    },
+    {
+      flag: '+',
+      parser: parsePlus
+    },
+    {
+      flag: '-',
+      parser: parseHyphen
     }
   ];
+};
+
+const allAreNumbers = (option) => {
+  const optionArg = option.slice(1);
+  const areNumbers = /^\d+$/;
+  return areNumbers.test(optionArg);
+};
+
+const parseHyphen = (args) => {
+  const currentArg = args.currentElement();
+  if (!allAreNumbers(currentArg)) {
+    throw illegalOptionError(currentArg);
+  }
+  return { flag: '-n', count: currentArg };
+};
+
+const parsePlus = (args) => {
+  const currentArg = args.currentElement();
+  if (!allAreNumbers(currentArg)) {
+    throw readFileError(currentArg, 'No such file or directory');
+  }
+  return { flag: '-n', count: currentArg };
 };
 
 const extractCount = (flag) => {
@@ -51,3 +89,5 @@ exports.parseCharOption = parseCharOption;
 exports.getOptionsAndParsers = getOptionsAndParsers;
 exports.tailParse = tailParse;
 exports.illegalOptionError = illegalOptionError;
+exports.parseHyphen = parseHyphen;
+exports.parsePlus = parsePlus;

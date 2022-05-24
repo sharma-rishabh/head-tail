@@ -8,7 +8,9 @@ const {
 const {
   parseCharOption,
   parseLineOption,
-  illegalOptionError
+  illegalOptionError,
+  parseHyphen,
+  parsePlus
 } = require('../../src/tail/parseTail.js');
 
 describe('parseArgs', () => {
@@ -44,6 +46,30 @@ describe('parseArgs', () => {
       options: [{ flag: '-n', count: '10' }]
     });
   });
+  it('should use plus parser to parse plus options', () => {
+    const allOptions = [
+      {
+        flag: '-n',
+        parser: parseLineOption
+      },
+      {
+        flag: '-c',
+        parser: parseCharOption
+      },
+      {
+        flag: '+',
+        parser: parsePlus
+      },
+      {
+        flag: '-',
+        parser: parseHyphen
+      }
+    ];
+    return assert.deepStrictEqual(parseArgs(['+10', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
+      files: ['a.txt', 'b.txt'],
+      options: [{ flag: '-n', count: '+10' }]
+    });
+  });
   it('should give all options in options array.', () => {
     const allOptions = [
       {
@@ -69,6 +95,14 @@ describe('parseArgs', () => {
       {
         flag: '-c',
         parser: parseCharOption
+      },
+      {
+        flag: '+',
+        parser: parsePlus
+      },
+      {
+        flag: '-',
+        parser: parseHyphen
       }
     ];
     return assert.throws(() => parseArgs(['-n10', '-c', '10', '-d19', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
