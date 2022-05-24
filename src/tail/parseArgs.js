@@ -4,6 +4,17 @@ const getLegalOptions = () => {
   return ['-n', '-c'];
 };
 
+const extractCount = (flag) => {
+  return flag.slice(2);
+};
+
+const parseLineOption = (args) => {
+  const flag = '-n';
+  const arg = args.currentElement();
+  const count = arg.length > 2 ? extractCount(arg) : args.nextElement();
+  return { flag, count };
+};
+
 const parseArgs = (args) => {
   const iterableArgs = createIterator(args);
   const files = iterableArgs.restOfElements();
@@ -12,3 +23,4 @@ const parseArgs = (args) => {
 
 exports.parseArgs = parseArgs;
 exports.getLegalOptions = getLegalOptions;
+exports.parseLineOption = parseLineOption;
