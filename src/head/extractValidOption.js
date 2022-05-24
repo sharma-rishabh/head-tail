@@ -1,6 +1,7 @@
 const { differentOptions,
   invalidSwitch,
-  illegalLineCount
+  illegalLineCount,
+  noArgument
 } = require('./throwFunctions.js');
 
 const switchSameAsPrev = ({ prevOption, sameAsPrev }, { option }) => {
@@ -38,6 +39,9 @@ const validateOptions = (options) => {
 
 const assertLineCountValidity = (option) => {
   const optionName = option.option === '-n' ? 'line' : 'byte';
+  if (option.count === undefined) {
+    throw noArgument(option.option);
+  }
   if (option.count < 1 || isNaN(option.count)) {
     throw illegalLineCount(optionName, option.count);
   }

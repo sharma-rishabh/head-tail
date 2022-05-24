@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { extractData, head } = require('../src/headLib.js');
+const { extractData, head } = require('../../src/head/headLib.js');
 
 describe('extractData', () => {
   it('should give array back if array length is equal to specified count.',

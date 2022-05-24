@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { printContent } = require('../src/printContent.js');
+const { printContent } = require('../../src/lib/printContent.js');
 
 const mockLogger = (contents) => {
   let index = 0;

@@ -1,4 +1,4 @@
-const { splitBy, joinBy } = require('../src/stringUtils.js');
+const { splitBy, joinBy } = require('../../src/lib/stringUtils.js');
 const assert = require('assert');
 
 describe('splitBy', () => {

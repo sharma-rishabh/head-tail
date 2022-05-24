@@ -5,7 +5,7 @@ const {
   areAllSwitchesSame,
   assertSwitchesValidity,
   assertLineCountValidity
-} = require('../src/extractValidOption.js');
+} = require('../../src/head/extractValidOption.js');
 
 describe('extractValidOption', () => {
   it('should give the only option present', () => {
@@ -29,7 +29,7 @@ describe('validateOptions', () => {
   it('should throw  invalidSwitch error if options are provided are not valid.', () => {
     return assert.throws(() => validateOptions([{ option: '-d', count: 10 }, { option: '-c', count: 10 }]), {
       name: 'invalidSwitch',
-      message: 'head:illegal option --d\nusage: head [-n lines | -c bytes] [file ...]',
+      message: 'head:illegal option -- d\nusage: head [-n lines | -c bytes] [file ...]',
       option: '-d'
     });
   });
@@ -51,7 +51,7 @@ describe('assertSwitchesValidity', () => {
   it('should throw error if all switches are not valid.', () => {
     return assert.throws(() => assertSwitchesValidity([{ option: '-d', count: 10 }, { option: '-c', count: 10 }]), {
       name: 'invalidSwitch',
-      message: 'head:illegal option --d\nusage: head [-n lines | -c bytes] [file ...]',
+      message: 'head:illegal option -- d\nusage: head [-n lines | -c bytes] [file ...]',
       option: '-d'
     });
   });
@@ -61,6 +61,7 @@ describe('assertLineCountValidity', () => {
   it('should not throw an error if line count is valid.', () => {
     return assert.ok(assertLineCountValidity({ option: '-n', count: '10' }));
   });
+
   it('should throw throw an error if line count is valid.', () => {
     return assert.throws(() => assertLineCountValidity({ option: '-n', count: 0 }), {
       name: 'illegallineCount',
@@ -68,6 +69,7 @@ describe('assertLineCountValidity', () => {
       count: 0
     });
   });
+
   it('should throw throw an error if byte count is valid.', () => {
     return assert.throws(() => assertLineCountValidity({ option: '-c', count: 0 }), {
       name: 'illegalbyteCount',
@@ -75,11 +77,19 @@ describe('assertLineCountValidity', () => {
       count: 0
     });
   });
-  it('should throw throw an error if line count is not present.', () => {
+
+  it('should  throw an error if line count is not present.', () => {
     return assert.throws(() => assertLineCountValidity({ option: '-n', count: NaN }), {
       name: 'illegallineCount',
       message: 'head: illegal line count -- NaN',
       count: NaN
+    });
+  });
+
+  it('should throw an error that -n needs an option.', () => {
+    return assert.throws(() => assertLineCountValidity({ option: '-n', count: undefined }), {
+      name: 'needArgument',
+      message: 'head: option requires an argument -- n\nusage: head[-n lines | -c bytes][file ...]'
     });
   });
 });

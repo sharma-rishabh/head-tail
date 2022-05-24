@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { parseArgs, parseOption } = require('../src/parseArgs.js');
+const { parseArgs, parseOption } = require('../../src/head/parseArgs.js');
 
 describe('parseArgs', () => {
   it('should work with option(-n) with spaces before count.', () => {

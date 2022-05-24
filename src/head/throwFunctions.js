@@ -6,9 +6,10 @@ const differentOptions = () => {
 };
 
 const invalidSwitch = (option) => {
+  const name = option.slice(1);
   return {
     name: 'invalidSwitch',
-    message: `head:illegal option -${option}
+    message: `head:illegal option -- ${name}
 usage: head [-n lines | -c bytes] [file ...]`,
     option: option
   };
@@ -37,8 +38,18 @@ const fileReadError = (fileName) => {
   };
 };
 
+const noArgument = (option) => {
+  const name = option.slice(1);
+  return {
+    name: 'needArgument',
+    message: `head: option requires an argument -- ${name}
+usage: head[-n lines | -c bytes][file ...]`
+  };
+};
+
 exports.differentOptions = differentOptions;
 exports.invalidSwitch = invalidSwitch;
 exports.illegalLineCount = illegalLineCount;
 exports.noFile = noFile;
 exports.fileReadError = fileReadError;
+exports.noArgument = noArgument;

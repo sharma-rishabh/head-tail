@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { tail } = require('../src/tailLib.js');
+const { tail } = require('../../src/tail/tailLib.js');
 
 describe('tail', () => {
   it('should give the all lines of the given content', () => {

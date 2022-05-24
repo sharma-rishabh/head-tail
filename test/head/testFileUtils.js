@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { assertFileExistence, getFileContent, headMultipleFiles, formatOutput } = require('../src/headLib.js');
+const { assertFileExistence, getFileContent, headMultipleFiles, formatOutput } = require('../../src/head/headLib.js');
 
 const mockReadFile = (expectedFileName, content) => {
   return (fileName, encoding) => {
