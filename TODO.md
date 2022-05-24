@@ -103,3 +103,4 @@
 - [x] implement `parseCountOption`.
 - [x] Implement `getOptionsAndParsers`.
 - [x] Implement `getParser`
+- [x] Change Name of `parseCountOption` to `parseCharOption`
