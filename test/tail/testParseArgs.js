@@ -1,13 +1,15 @@
 const assert = require('assert');
 const {
   parseArgs,
-  parseLineOption,
-  parseCharOption,
-  getOptionsAndParsers,
   getParser,
   isOptionLegal
 } = require('../../src/tail/parseArgs.js');
-const { createIterator } = require('../../src/tail/createIterator.js');
+
+const {
+  parseCharOption,
+  parseLineOption,
+  illegalOptionError
+} = require('../../src/tail/parseTail.js');
 
 describe('parseArgs', () => {
   it('should give all files in an array.', () => {
@@ -21,7 +23,7 @@ describe('parseArgs', () => {
         parser: parseCharOption
       }
     ];
-    return assert.deepStrictEqual(parseArgs(['a.txt', 'b.txt'], allOptions), {
+    return assert.deepStrictEqual(parseArgs(['a.txt', 'b.txt'], allOptions, illegalOptionError), {
       files: ['a.txt', 'b.txt'],
       options: []
     });
@@ -37,7 +39,7 @@ describe('parseArgs', () => {
         parser: parseCharOption
       }
     ];
-    return assert.deepStrictEqual(parseArgs(['-n10', 'a.txt', 'b.txt'], allOptions), {
+    return assert.deepStrictEqual(parseArgs(['-n10', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
       files: ['a.txt', 'b.txt'],
       options: [{ flag: '-n', count: '10' }]
     });
@@ -53,7 +55,7 @@ describe('parseArgs', () => {
         parser: parseCharOption
       }
     ];
-    return assert.deepStrictEqual(parseArgs(['-n10', '-c', '10', 'a.txt', 'b.txt'], allOptions), {
+    return assert.deepStrictEqual(parseArgs(['-n10', '-c', '10', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
       files: ['a.txt', 'b.txt'],
       options: [{ flag: '-n', count: '10' }, { flag: '-c', count: '10' }]
     });
@@ -69,59 +71,10 @@ describe('parseArgs', () => {
         parser: parseCharOption
       }
     ];
-    return assert.throws(() => parseArgs(['-n10', '-c', '10', '-d19', 'a.txt', 'b.txt'], allOptions), {
+    return assert.throws(() => parseArgs(['-n10', '-c', '10', '-d19', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
       name: 'illegalOption',
       message: `'tail: illegal option -- d
 usage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]`});
-  });
-});
-
-describe('parseLineOption', () => {
-  it('Should parse an option whose values are separate.', () => {
-    const iterableArgs = createIterator(['-n', '10']);
-    return assert.deepStrictEqual(parseLineOption(iterableArgs), { flag: '-n', count: '10' });
-  });
-  it('Should parse an option whose values are integrated.', () => {
-    const iterableArgs = createIterator(['-n10']);
-    return assert.deepStrictEqual(parseLineOption(iterableArgs), { flag: '-n', count: '10' });
-  });
-  it('Should preserve signs for count provided by the user.', () => {
-    const iterableArgs = createIterator(['-n+10', '-n-10']);
-    assert.deepStrictEqual(parseLineOption(iterableArgs), { flag: '-n', count: '+10' });
-    iterableArgs.nextElement();
-    assert.deepStrictEqual(parseLineOption(iterableArgs), { flag: '-n', count: '-10' });
-  });
-});
-
-describe('parseCharOption', () => {
-  it('should parse an option whose values are separate', () => {
-    const iterableArgs = createIterator(['-n', '10']);
-    return assert.deepStrictEqual(parseCharOption(iterableArgs), { flag: '-c', count: '10' });
-  });
-  it('Should parse an option whose values are integrated.', () => {
-    const iterableArgs = createIterator(['-n10']);
-    return assert.deepStrictEqual(parseCharOption(iterableArgs), { flag: '-c', count: '10' });
-  });
-  it('Should preserve signs for count provided by the user.', () => {
-    const iterableArgs = createIterator(['-n+10', '-n-10']);
-    assert.deepStrictEqual(parseCharOption(iterableArgs), { flag: '-c', count: '+10' });
-    iterableArgs.nextElement();
-    assert.deepStrictEqual(parseCharOption(iterableArgs), { flag: '-c', count: '-10' });
-  });
-});
-
-describe('getOptionsAndParsers', () => {
-  it('should return all options and their parsers.', () => {
-    return assert.deepStrictEqual(getOptionsAndParsers(), [
-      {
-        flag: '-n',
-        parser: parseLineOption
-      },
-      {
-        flag: '-c',
-        parser: parseCharOption
-      }
-    ]);
   });
 });
 
