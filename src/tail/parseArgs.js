@@ -1,5 +1,9 @@
 const { createIterator } = require('./createIterator.js');
 
+const getLegalOptions = () => {
+  return ['-n', '-c'];
+};
+
 const parseArgs = (args) => {
   const iterableArgs = createIterator(args);
   const files = iterableArgs.restOfElements();
@@ -7,3 +11,4 @@ const parseArgs = (args) => {
 };
 
 exports.parseArgs = parseArgs;
+exports.getLegalOptions = getLegalOptions;

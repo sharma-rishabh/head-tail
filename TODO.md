@@ -98,3 +98,4 @@
 - [x] make `tail` work for a single file.
 - [x] make `createIterator`
 - [x] Implement basic `parseArgs` to work with files.
+- [X] implement `getLegalOptions`.

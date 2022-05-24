@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { parseArgs } = require('../../src/tail/parseArgs.js');
+const { parseArgs, getLegalOptions } = require('../../src/tail/parseArgs.js');
 
 describe('parseArgs', () => {
   it('should give all files as file array.', () => {
@@ -7,5 +7,11 @@ describe('parseArgs', () => {
       files: ['a.txt', 'b.txt'],
       options: []
     });
+  });
+});
+
+describe('getLegalOptions', () => {
+  it('should return all legal options', () => {
+    return assert.deepStrictEqual(getLegalOptions(), ['-n', '-c']);
   });
 });
