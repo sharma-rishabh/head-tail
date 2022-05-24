@@ -1,7 +1,10 @@
 **TODO**
 
+- [ ] make `tail` work for multiple files.
 - [ ] Connect `tail` with cl inputs.
-- [ ] Use `stringUtils` in tail.js
+- [ ] Make parseArgs for tail.
+- [ ] make `tail` work for a single file.
+- [ ] use print functions in tail.
 
 **MAYBE**
 
@@ -89,3 +92,5 @@
 - [x] change error of illegal option.
 - [x] add error for option required.
 - [x] Change directory structure to accommodate for `tail`
+- [x] make `extractData`
+- [x] Use `stringUtils` in tail.js
