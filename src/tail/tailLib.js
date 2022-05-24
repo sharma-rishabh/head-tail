@@ -22,5 +22,11 @@ const tail = (content, count, delimiter) => {
   return joinBy(requiredContent, delimiter);
 };
 
+const tailMain = (readFile, fileName) => {
+  const content = readFile(fileName, 'utf8');
+  return tail(content, '10', '\n');
+};
+
 exports.tail = tail;
 exports.extractData = extractData;
+exports.tailMain = tailMain;

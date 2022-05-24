@@ -1,10 +1,10 @@
 **TODO**
 
 - [ ] make `tail` work for multiple files.
+- [ ] use print functions in tail.
 - [ ] Connect `tail` with cl inputs.
 - [ ] Make parseArgs for tail.
 - [ ] make `tail` work for a single file.
-- [ ] use print functions in tail.
 
 **MAYBE**
 
@@ -94,3 +94,5 @@
 - [x] Change directory structure to accommodate for `tail`
 - [x] make `extractData`
 - [x] Use `stringUtils` in tail.js
+- [x] implement `tailMain` for single file.
+- [x] make `testTailMain.js`
