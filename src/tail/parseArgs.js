@@ -13,10 +13,6 @@ usage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]`
 
 const isOption = (option) => option.startsWith('-');
 
-const getLegalOptions = () => {
-  return ['-n', '-c'];
-};
-
 const getOptionsAndParsers = () => {
   return [
     {
@@ -34,21 +30,9 @@ const extractCount = (flag) => {
   return flag.slice(2);
 };
 
-const isOptionLegal = (option) => {
-  const legalOption = getLegalOptions();
+const isOptionLegal = (option, allFlags) => {
+  const legalOption = allFlags.map((option) => option.flag);
   return legalOption.some((flag) => option.includes(flag));
-};
-
-const doesOptionContainFlag = (optionAndParser, currentOption) => {
-  return currentOption.startsWith(optionAndParser.flag);
-};
-
-const getParser = (option) => {
-  const optionsAndParsers = getOptionsAndParsers();
-  const validOption = optionsAndParsers.find(
-    (optionAndParser) => doesOptionContainFlag(optionAndParser, option)
-  );
-  return validOption.parser;
 };
 
 const parseLineOption = (args) => {
@@ -65,17 +49,27 @@ const parseCharOption = (args) => {
   return { flag, count };
 };
 
-const parseArgs = (args) => {
+const doesOptionContainFlag = (flagAndParser, currentOption) => {
+  return currentOption.startsWith(flagAndParser.flag);
+};
+
+const getParser = (option, allFlags) => {
+  const validOption = allFlags.find(
+    (flag) => doesOptionContainFlag(flag, option)
+  );
+  return validOption.parser;
+};
+
+const parseArgs = (args, allFlags) => {
   const iterableArgs = createIterator(args);
   let currentArg = iterableArgs.currentElement();
   const options = [];
 
   while (isOption(currentArg)) {
-    if (!isOptionLegal(currentArg)) {
+    if (!isOptionLegal(currentArg, allFlags)) {
       throw illegalOptionError(currentArg);
     }
-
-    const parser = getParser(currentArg);
+    const parser = getParser(currentArg, allFlags);
     options.push(parser(iterableArgs));
     currentArg = iterableArgs.nextElement();
   }
@@ -85,7 +79,6 @@ const parseArgs = (args) => {
 };
 
 exports.parseArgs = parseArgs;
-exports.getLegalOptions = getLegalOptions;
 exports.parseLineOption = parseLineOption;
 exports.parseCharOption = parseCharOption;
 exports.getOptionsAndParsers = getOptionsAndParsers;
