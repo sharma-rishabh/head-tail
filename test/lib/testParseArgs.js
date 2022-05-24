@@ -3,7 +3,7 @@ const {
   parseArgs,
   getParser,
   isOptionLegal
-} = require('../../src/tail/parseArgs.js');
+} = require('../../src/lib/parseArgs.js');
 
 const {
   parseCharOption,

@@ -1,4 +1,4 @@
-const { parseArgs } = require('./parseArgs.js');
+const { parseArgs } = require('../lib/parseArgs.js');
 
 const extractFlag = (option) => option.slice(1, 2);
 

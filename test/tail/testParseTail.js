@@ -2,7 +2,8 @@ const assert = require('assert');
 const {
   parseLineOption,
   parseCharOption,
-  getOptionsAndParsers
+  getOptionsAndParsers,
+  tailParse
 } = require('../../src/tail/parseTail.js');
 
 const { createIterator } = require('../../src/tail/createIterator.js');
@@ -53,5 +54,20 @@ describe('getOptionsAndParsers', () => {
         parser: parseCharOption
       }
     ]);
+  });
+});
+
+describe('tailParse', () => {
+  it('should return parsed files for tail.', () => {
+    return assert.deepStrictEqual(tailParse(['a.txt', 'b.txt']), {
+      options: [],
+      files: ['a.txt', 'b.txt']
+    });
+  });
+  it('should return parsed option for tail.', () => {
+    return assert.deepStrictEqual(tailParse(['-n10', '-n', '10', 'a.txt', 'b.txt']), {
+      options: [{ flag: '-n', count: '10' }, { flag: '-n', count: '10' }],
+      files: ['a.txt', 'b.txt']
+    });
   });
 });

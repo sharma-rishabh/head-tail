@@ -1,4 +1,4 @@
-const { createIterator } = require('./createIterator.js');
+const { createIterator } = require('../tail/createIterator.js');
 
 const isOptionLegal = (option, allFlags) => {
   const legalOption = allFlags.map((option) => option.flag);
