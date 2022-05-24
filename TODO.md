@@ -4,7 +4,6 @@
 - [ ] use print functions in tail.
 - [ ] Connect `tail` with cl inputs.
 - [ ] Make parseArgs for tail.
-- [ ] make `tail` work for a single file.
 
 **MAYBE**
 
@@ -96,3 +95,4 @@
 - [x] Use `stringUtils` in tail.js
 - [x] implement `tailMain` for single file.
 - [x] make `testTailMain.js`
+- [x] make `tail` work for a single file.
