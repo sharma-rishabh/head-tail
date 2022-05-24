@@ -5,7 +5,8 @@ const {
   parseLineOption,
   parseCharOption,
   getOptionsAndParsers,
-  getParser
+  getParser,
+  isOptionLegal
 } = require('../../src/tail/parseArgs.js');
 const { createIterator } = require('../../src/tail/createIterator.js');
 
@@ -28,7 +29,12 @@ describe('parseArgs', () => {
       options: [{ flag: '-n', count: '10' }, { flag: '-c', count: '10' }]
     });
   });
-
+  it('should throw if one of the option given is invalid.', () => {
+    return assert.throws(() => parseArgs(['-n10', '-c', '10', '-d19', 'a.txt', 'b.txt']), {
+      name: 'illegalOption',
+      message: `'tail: illegal option -- d
+usage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]`});
+  });
 });
 
 describe('getLegalOptions', () => {
@@ -92,5 +98,14 @@ describe('getParser', () => {
   });
   it('should should return parser for line.', () => {
     return assert.deepStrictEqual(getParser('-c10'), parseCharOption);
+  });
+});
+
+describe('isOptionLegal', () => {
+  it('should return true if option is legal.', () => {
+    return assert.ok(isOptionLegal('-n10'));
+  });
+  it('should return true if option is illegal.', () => {
+    return assert.strictEqual(isOptionLegal('-d10'), false);
   });
 });

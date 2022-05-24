@@ -104,3 +104,4 @@
 - [x] Implement `getParser`
 - [x] Change Name of `parseCountOption` to `parseCharOption`
 - [x] Make `parseArgs` for tail.
+- [x] `parseArgs` should throw and error if given option is illegal.

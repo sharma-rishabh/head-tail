@@ -1,5 +1,16 @@
 const { createIterator } = require('./createIterator.js');
 
+const extractFlag = (option) => option.slice(1, 2);
+
+const illegalOptionError = (option) => {
+  const flag = extractFlag(option);
+  return {
+    name: 'illegalOption',
+    message: `'tail: illegal option -- ${flag}
+usage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]`
+  };
+};
+
 const isOption = (option) => option.startsWith('-');
 
 const getLegalOptions = () => {
@@ -21,6 +32,11 @@ const getOptionsAndParsers = () => {
 
 const extractCount = (flag) => {
   return flag.slice(2);
+};
+
+const isOptionLegal = (option) => {
+  const legalOption = getLegalOptions();
+  return legalOption.some((flag) => option.includes(flag));
 };
 
 const doesOptionContainFlag = (optionAndParser, currentOption) => {
@@ -53,11 +69,17 @@ const parseArgs = (args) => {
   const iterableArgs = createIterator(args);
   let currentArg = iterableArgs.currentElement();
   const options = [];
+
   while (isOption(currentArg)) {
+    if (!isOptionLegal(currentArg)) {
+      throw illegalOptionError(currentArg);
+    }
+
     const parser = getParser(currentArg);
     options.push(parser(iterableArgs));
     currentArg = iterableArgs.nextElement();
   }
+
   const files = iterableArgs.restOfElements();
   return { options, files };
 };
@@ -68,3 +90,4 @@ exports.parseLineOption = parseLineOption;
 exports.parseCharOption = parseCharOption;
 exports.getOptionsAndParsers = getOptionsAndParsers;
 exports.getParser = getParser;
+exports.isOptionLegal = isOptionLegal;
