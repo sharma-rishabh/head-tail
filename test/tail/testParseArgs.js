@@ -4,12 +4,13 @@ const {
   getLegalOptions,
   parseLineOption,
   parseCountOption,
-  getOptionsAndParsers
+  getOptionsAndParsers,
+  getParser
 } = require('../../src/tail/parseArgs.js');
 const { createIterator } = require('../../src/tail/createIterator.js');
 
 describe('parseArgs', () => {
-  it('should give all files as file array.', () => {
+  it('should give all files in an array.', () => {
     return assert.deepStrictEqual(parseArgs(['a.txt', 'b.txt']), {
       files: ['a.txt', 'b.txt'],
       options: []
@@ -69,5 +70,14 @@ describe('getOptionsAndParsers', () => {
         parser: parseCountOption
       }
     ]);
+  });
+});
+
+describe('getParser', () => {
+  it('should should return parser for line.', () => {
+    return assert.deepStrictEqual(getParser('-n10'), parseLineOption);
+  });
+  it('should should return parser for line.', () => {
+    return assert.deepStrictEqual(getParser('-c10'), parseCountOption);
   });
 });

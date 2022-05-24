@@ -1,5 +1,7 @@
 const { createIterator } = require('./createIterator.js');
 
+const isOption = (option) => option.startsWith('-');
+
 const getLegalOptions = () => {
   return ['-n', '-c'];
 };
@@ -19,6 +21,18 @@ const getOptionsAndParsers = () => {
 
 const extractCount = (flag) => {
   return flag.slice(2);
+};
+
+const doesOptionContainFlag = (optionAndParser, currentOption) => {
+  return currentOption.startsWith(optionAndParser.flag);
+};
+
+const getParser = (option) => {
+  const optionsAndParsers = getOptionsAndParsers();
+  const validOption = optionsAndParsers.find(
+    (optionAndParser) => doesOptionContainFlag(optionAndParser, option)
+  );
+  return validOption.parser;
 };
 
 const parseLineOption = (args) => {
@@ -46,3 +60,4 @@ exports.getLegalOptions = getLegalOptions;
 exports.parseLineOption = parseLineOption;
 exports.parseCountOption = parseCountOption;
 exports.getOptionsAndParsers = getOptionsAndParsers;
+exports.getParser = getParser;

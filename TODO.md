@@ -102,3 +102,4 @@
 - [x] implement `parseLineOption`.
 - [x] implement `parseCountOption`.
 - [x] Implement `getOptionsAndParsers`.
+- [x] Implement `getParser`
