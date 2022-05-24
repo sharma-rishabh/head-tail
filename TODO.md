@@ -96,3 +96,4 @@
 - [x] implement `tailMain` for single file.
 - [x] make `testTailMain.js`
 - [x] make `tail` work for a single file.
+- [x] make `createIterator`
