@@ -16,6 +16,19 @@ describe('parseArgs', () => {
       options: []
     });
   });
+  it('should give option in options array.', () => {
+    return assert.deepStrictEqual(parseArgs(['-n10', 'a.txt', 'b.txt']), {
+      files: ['a.txt', 'b.txt'],
+      options: [{ flag: '-n', count: '10' }]
+    });
+  });
+  it('should give all options in options array.', () => {
+    return assert.deepStrictEqual(parseArgs(['-n10', '-c', '10', 'a.txt', 'b.txt']), {
+      files: ['a.txt', 'b.txt'],
+      options: [{ flag: '-n', count: '10' }, { flag: '-c', count: '10' }]
+    });
+  });
+
 });
 
 describe('getLegalOptions', () => {

@@ -3,7 +3,6 @@
 - [ ] make `tail` work for multiple files.
 - [ ] use print functions in tail.
 - [ ] Connect `tail` with cl inputs.
-- [ ] Make `parseArgs` for tail.
 
 **MAYBE**
 
@@ -104,3 +103,4 @@
 - [x] Implement `getOptionsAndParsers`.
 - [x] Implement `getParser`
 - [x] Change Name of `parseCountOption` to `parseCharOption`
+- [x] Make `parseArgs` for tail.

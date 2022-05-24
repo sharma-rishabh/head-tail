@@ -51,8 +51,15 @@ const parseCharOption = (args) => {
 
 const parseArgs = (args) => {
   const iterableArgs = createIterator(args);
+  let currentArg = iterableArgs.currentElement();
+  const options = [];
+  while (isOption(currentArg)) {
+    const parser = getParser(currentArg);
+    options.push(parser(iterableArgs));
+    currentArg = iterableArgs.nextElement();
+  }
   const files = iterableArgs.restOfElements();
-  return { options: [], files };
+  return { options, files };
 };
 
 exports.parseArgs = parseArgs;
