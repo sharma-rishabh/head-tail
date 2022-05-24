@@ -53,7 +53,7 @@ describe('headMultipleFiles', () => {
       { content: '==> a.txt <==\na\nb\n', isError: false },
       { content: '==> b.txt <==\na\n', isError: false }
     ];
-    const option = { option: '-n', count: 10 };
+    const option = { option: '-n', count: '10' };
     return assert.deepStrictEqual(headMultipleFiles(files, mockedReadFile, option, formatOutput), expected);
   });
   it('should do head of multiple files and give error if some files don\'t exist', () => {
@@ -64,7 +64,7 @@ describe('headMultipleFiles', () => {
       { content: 'head: c.txt: No such file or directory', isError: true },
       { content: '==> b.txt <==\na\n', isError: false }
     ];
-    const option = { option: '-n', count: 10 };
+    const option = { option: '-n', count: '10' };
     return assert.deepStrictEqual(headMultipleFiles(files, mockedReadFile, option, formatOutput), expected);
   });
 });

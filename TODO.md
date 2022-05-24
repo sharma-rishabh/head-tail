@@ -1,9 +1,10 @@
 **TODO**
 
+- [ ] Connect `tail` with cl inputs.
+- [ ] Use `stringUtils` in tail.js
 
 **MAYBE**
 
-- [ ] Consider changing contract of parse args to not convert to number.
 
 **DONE**
 
@@ -84,3 +85,4 @@
 - [x] Change contract of `headMultipleFiles` to accept a formatter.
 - [x] Extract `testFileUtils` in a separate functions.
 - [x] get rid of unnecessary code.
+- [x] Consider changing contract of parse args to not convert to number.

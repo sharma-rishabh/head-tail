@@ -16,7 +16,7 @@ const parseOption = (option, probableCount) => {
   if (isSpecialOption(option)) {
     return {
       option: '-n',
-      count: +option.slice(1)
+      count: option.slice(1)
     };
   }
   if (isOptionIntegrated(option)) {
@@ -27,12 +27,12 @@ const parseOption = (option, probableCount) => {
   }
   return {
     option: option,
-    count: +probableCount
+    count: probableCount
   };
 };
 
 const extractOption = (integratedOption) => integratedOption.slice(0, 2);
-const extractCount = (integratedOption) => +integratedOption.slice(2);
+const extractCount = (integratedOption) => integratedOption.slice(2);
 
 const parseArgs = (args) => {
   let index = 0;
@@ -47,7 +47,7 @@ const parseArgs = (args) => {
   const files = args.slice(index);
 
   if (optionsArray.length === 0) {
-    optionsArray.push({ option: '-n', count: 10 });
+    optionsArray.push({ option: '-n', count: '10' });
   }
 
   return { files, optionsArray };

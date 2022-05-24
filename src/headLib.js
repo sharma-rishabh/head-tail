@@ -4,7 +4,7 @@ const { printContent } = require('./printContent.js');
 const { splitBy, joinBy } = require('./stringUtils.js');
 const { noFile, fileReadError } = require('./throwFunctions.js');
 
-const extractData = (array, numOfElements) => array.slice(0, numOfElements);
+const extractData = (array, numOfElements) => array.slice(0, +numOfElements);
 
 const getSeparator = (option) => option === '-n' ? '\n' : '';
 const identity = (content) => content;
