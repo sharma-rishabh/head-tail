@@ -7,9 +7,6 @@
 - [ ] change condition in `isOption`
 - [ ] extract throw out `parseHyphen` to validate function and pass it as part of allOption.
 - [ ] create a closure for `parseLines` and `parseCount`.
-- [ ] make `tail` work for multiple files.
-- [ ] use print functions in tail.
-
 
 **MAYBE**
 
@@ -122,3 +119,5 @@
 - [x] implement `headFile`
 - [x] Investigate how slice handles negative indices.
 - [x] implement `formatContent`
+- [x] make `tail` work for multiple files.
+- [x] use print functions in tail.

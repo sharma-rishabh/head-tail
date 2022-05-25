@@ -4,9 +4,9 @@ const { log, error } = require('console');
 
 const main = () => {
   try {
-    log(tailMain(fs.readFileSync, ...process.argv.slice(2)));
+    tailMain(fs.readFileSync, log, error, ...process.argv.slice(2));
   } catch (err) {
-    error('usage: tail [-c # | -n #] [file ...]');
+    error(err.message);
     process.exit(1);
   }
 };

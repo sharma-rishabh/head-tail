@@ -1,5 +1,6 @@
 const { splitBy, joinBy } = require('../lib/stringUtils.js');
 const { tailParse, readFileError } = require('./parseTail.js');
+const { printContent } = require('../lib/printContent.js');
 
 const startsWithPlus = (string) => string.startsWith('+');
 const startsWithHyphen = (string) => string.startsWith('-');
@@ -7,6 +8,8 @@ const startsWithHyphen = (string) => string.startsWith('-');
 const formatContent = (content, fileName) => {
   return `==>${fileName}<==\n${content}`;
 };
+
+const identity = (value) => value;
 
 const getReadError = (errorMessage) => {
   const codeAndMessage = errorMessage.split(': ');
@@ -61,15 +64,19 @@ const tailFile = (files, readFile, formatter, option) => {
   });
 };
 
+const getFormatter = (files) => {
+  return files.length > 1 ? formatContent : identity;
+};
+
 const compileOptions = (options) =>
   options.length === 0 ? { flag: '-n', count: '10' } : options[0];
 
-const tailMain = (readFile, ...args) => {
+const tailMain = (readFile, log, error, ...args) => {
   const { options, files } = tailParse(args);
-  const { flag, count } = compileOptions(options);
-  const fileName = files[0];
-  const content = readFile(fileName, 'utf8');
-  return tail(content, count, getDelimiter(flag));
+  const option = compileOptions(options);
+  const formatter = getFormatter(files);
+  const tailedFiles = tailFile(files, readFile, formatter, option);
+  printContent(tailedFiles, log, error);
 };
 
 exports.tail = tail;

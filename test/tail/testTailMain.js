@@ -32,16 +32,29 @@ const mockRFSMultiFile = (expectedFiles, contents) => {
   };
 };
 
+const mockLogger = (contents) => {
+  let index = 0;
+  const log = (content) => {
+    assert.equal(content, contents[index]);
+    log.count++;
+    index++;
+  };
+  log.count = 0;
+  return log;
+};
+
 describe('tailMain', () => {
   it('should return tailed content of the given file.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk');
-    const expected = 'b\nc\nd\ne\nf\ng\nh\ni\nj\nk';
-    return assert.strictEqual(tailMain(mockedReadFile, 'a.txt'), expected);
+    const mockedLog = mockLogger(['b\nc\nd\ne\nf\ng\nh\ni\nj\nk']);
+    const mockedError = mockLogger([]);
+    return assert.strictEqual(tailMain(mockedReadFile, mockedLog, mockedError, 'a.txt'), undefined);
   });
   it('should use given options to tail the given file.', () => {
-    const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk');
-    const expected = 'b\nc\nd\ne\nf\ng\nh\ni\nj\nk';
-    return assert.strictEqual(tailMain(mockedReadFile, '-n', '10', 'a.txt'), expected);
+    const mockedReadFile = mockRFSMultiFile(['a.txt', 'b.txt'], ['a\nb', 'a\nc']);
+    const mockedLog = mockLogger(['==>a.txt<==\nb', '==>b.txt<==\nc']);
+    const mockedError = mockLogger([]);
+    return assert.strictEqual(tailMain(mockedReadFile, mockedLog, mockedError, '-n', '1', 'a.txt', 'b.txt'), undefined);
   });
 });
 
