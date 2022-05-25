@@ -1,6 +1,5 @@
 **TODO**
 
-- [ ] Investigate how slice handles negative indices.
 - [ ] make `reverseContent` work.
 - [ ] make `noFormatting` work.
 - [ ] make `compileOptions`.
@@ -121,3 +120,4 @@
 - [x] Connect `tail` with cl inputs.
 - [x] implement `getFileContent`
 - [x] implement `headFile`
+- [x] Investigate how slice handles negative indices.

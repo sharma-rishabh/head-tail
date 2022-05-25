@@ -14,8 +14,10 @@ const getStartIndex = (content, count) => {
   if (startsWithPlus(count)) {
     return +count === 0 ? +count : +count - 1;
   }
-  const elementsToExtract = startsWithHyphen(count) ? -count : +count;
-  return content.length - elementsToExtract;
+  if (startsWithHyphen(count)) {
+    return +count === 0 ? content.length : +count;
+  }
+  return -count;
 };
 
 const extractData = (content, count) => {

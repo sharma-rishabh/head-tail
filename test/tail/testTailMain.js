@@ -70,7 +70,7 @@ describe('tailFile', () => {
   it('should tail and format the content of a single file.', () => {
     const mockedRFS = mockRFSMultiFile(['b.txt'], ['1\n2\n3\n4\n5\n6']);
     const identity = (value) => value;
-    const option = { flag: '-n', count: '6' };
+    const option = { flag: '-n', count: '10' };
     return assert.deepStrictEqual(tailFile(['a.txt'], mockedRFS, identity, option), [{ content: 'tail: a.txt:no such file or directory', isError: true }]);
   });
   it('should tail and format the content of a single file.', () => {
