@@ -10,11 +10,18 @@ const readFileError = (fileName, message) => {
   };
 };
 
-const illegalOptionError = (option) => {
-  const flag = extractFlag(option);
+const illegalOffsetError = (count) => {
+  return {
+    name: 'illegalOffsetError',
+    message: `tail: illegal offset -- ${count}`
+  };
+};
+
+const illegalOptionError = (count) => {
+  const flag = extractFlag(count);
   return {
     name: 'illegalOption',
-    message: `'tail: illegal option -- ${flag}
+    message: `tail: illegal option -- ${flag}
 usage: tail [-r] [-q] [-c # | -n #] [file ...]`
   };
 };
@@ -23,42 +30,46 @@ const getOptionsAndParsers = () => {
   return [
     {
       flag: '-n',
-      parser: parseLineOption
+      parser: parseLineOption,
+      validator: offsetValidator
     },
     {
       flag: '-c',
-      parser: parseCharOption
+      parser: parseCharOption,
+      validator: offsetValidator
     },
     {
       flag: '+',
-      parser: parsePlus
+      parser: parsePlus,
+      validator: legalOptionValidator
     },
     {
       flag: '-',
-      parser: parseHyphen
+      parser: parseHyphen,
+      validator: legalOptionValidator
     }
   ];
 };
 
-const allAreNumbers = (option) => {
-  const optionArg = option.slice(1);
-  const areNumbers = /^\d+$/;
-  return areNumbers.test(optionArg);
+const offsetValidator = ({ count }) => {
+  if (!isFinite(count)) {
+    throw illegalOffsetError(count);
+  }
+};
+
+const legalOptionValidator = ({ count }) => {
+  if (!isFinite(count)) {
+    throw illegalOptionError(count);
+  }
 };
 
 const parseHyphen = (args) => {
   const currentArg = args.currentElement();
-  if (!allAreNumbers(currentArg)) {
-    throw illegalOptionError(currentArg);
-  }
   return { flag: '-n', count: currentArg };
 };
 
 const parsePlus = (args) => {
   const currentArg = args.currentElement();
-  if (!allAreNumbers(currentArg)) {
-    throw readFileError(currentArg, 'No such file or directory');
-  }
   return { flag: '-n', count: currentArg };
 };
 
@@ -81,7 +92,7 @@ const parseCharOption = (args) => {
 };
 
 const tailParse = (args) => {
-  return parseArgs(args, getOptionsAndParsers(), illegalOptionError);
+  return parseArgs(args, getOptionsAndParsers());
 };
 
 exports.parseLineOption = parseLineOption;
@@ -92,3 +103,5 @@ exports.illegalOptionError = illegalOptionError;
 exports.parseHyphen = parseHyphen;
 exports.parsePlus = parsePlus;
 exports.readFileError = readFileError;
+exports.offsetValidator = offsetValidator;
+exports.legalOptionValidator = legalOptionValidator;

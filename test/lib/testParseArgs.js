@@ -1,8 +1,7 @@
 const assert = require('assert');
 const {
   parseArgs,
-  getParser,
-  isOptionLegal
+  getParserAndValidator
 } = require('../../src/lib/parseArgs.js');
 
 const {
@@ -10,7 +9,9 @@ const {
   parseLineOption,
   illegalOptionError,
   parseHyphen,
-  parsePlus
+  parsePlus,
+  offsetValidator,
+  legalOptionValidator
 } = require('../../src/tail/parseTail.js');
 
 describe('parseArgs', () => {
@@ -34,11 +35,8 @@ describe('parseArgs', () => {
     const allOptions = [
       {
         flag: '-n',
-        parser: parseLineOption
-      },
-      {
-        flag: '-c',
-        parser: parseCharOption
+        parser: parseLineOption,
+        validator: offsetValidator
       }
     ];
     return assert.deepStrictEqual(parseArgs(['-n10', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
@@ -49,20 +47,9 @@ describe('parseArgs', () => {
   it('should use plus parser to parse plus options', () => {
     const allOptions = [
       {
-        flag: '-n',
-        parser: parseLineOption
-      },
-      {
-        flag: '-c',
-        parser: parseCharOption
-      },
-      {
         flag: '+',
-        parser: parsePlus
-      },
-      {
-        flag: '-',
-        parser: parseHyphen
+        parser: parsePlus,
+        validator: legalOptionValidator
       }
     ];
     return assert.deepStrictEqual(parseArgs(['+10', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
@@ -73,20 +60,9 @@ describe('parseArgs', () => {
   it('should consider a plus not followed by a digit as a file', () => {
     const allOptions = [
       {
-        flag: '-n',
-        parser: parseLineOption
-      },
-      {
-        flag: '-c',
-        parser: parseCharOption
-      },
-      {
         flag: '+',
-        parser: parsePlus
-      },
-      {
-        flag: '-',
-        parser: parseHyphen
+        parser: parsePlus,
+        validator: legalOptionValidator
       }
     ];
     return assert.deepStrictEqual(parseArgs(['+p', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
@@ -94,15 +70,18 @@ describe('parseArgs', () => {
       options: []
     });
   });
+
   it('should give all options in options array.', () => {
     const allOptions = [
       {
         flag: '-n',
-        parser: parseLineOption
+        parser: parseLineOption,
+        validator: offsetValidator
       },
       {
         flag: '-c',
-        parser: parseCharOption
+        parser: parseCharOption,
+        validator: offsetValidator
       }
     ];
     return assert.deepStrictEqual(parseArgs(['-n10', '-c', '10', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
@@ -110,86 +89,51 @@ describe('parseArgs', () => {
       options: [{ flag: '-n', count: '10' }, { flag: '-c', count: '10' }]
     });
   });
+
   it('should throw if one of the option given is invalid.', () => {
     const allOptions = [
       {
-        flag: '-n',
-        parser: parseLineOption
-      },
-      {
-        flag: '-c',
-        parser: parseCharOption
-      },
-      {
-        flag: '+',
-        parser: parsePlus
-      },
-      {
         flag: '-',
-        parser: parseHyphen
+        parser: parseHyphen,
+        validator: legalOptionValidator
       }
     ];
-    return assert.throws(() => parseArgs(['-n10', '-c', '10', '-d19', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
+    return assert.throws(() => parseArgs(['-d19', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
       name: 'illegalOption',
-      message: `'tail: illegal option -- d
+      message: `tail: illegal option -- d
 usage: tail [-r] [-q] [-c # | -n #] [file ...]`});
   });
 });
 
-describe('getParser', () => {
+describe('getParserAndValidator', () => {
   it('should should return parser for line.', () => {
     const allOptions = [
       {
         flag: '-n',
-        parser: parseLineOption
+        parser: parseLineOption,
+        validator: offsetValidator
       },
       {
         flag: '-c',
-        parser: parseCharOption
+        parser: parseCharOption,
+        validator: offsetValidator
       }
     ];
-    return assert.deepStrictEqual(getParser('-n10', allOptions), parseLineOption);
+    return assert.deepStrictEqual(getParserAndValidator('-n10', allOptions), { parser: parseLineOption, validator: offsetValidator });
   });
   it('should should return parser for line.', () => {
     const allOptions = [
       {
         flag: '-n',
-        parser: parseLineOption
+        parser: parseLineOption,
+        validator: offsetValidator
       },
       {
         flag: '-c',
-        parser: parseCharOption
+        parser: parseCharOption,
+        validator: offsetValidator
       }
     ];
-    return assert.deepStrictEqual(getParser('-c10', allOptions), parseCharOption);
-  });
-});
-
-describe('isOptionLegal', () => {
-  it('should return true if option is legal.', () => {
-    const allOptions = [
-      {
-        flag: '-n',
-        parser: parseLineOption
-      },
-      {
-        flag: '-c',
-        parser: parseCharOption
-      }
-    ];
-    return assert.ok(isOptionLegal('-n10', allOptions));
-  });
-  it('should return true if option is illegal.', () => {
-    const allOptions = [
-      {
-        flag: '-n',
-        parser: parseLineOption
-      },
-      {
-        flag: '-c',
-        parser: parseCharOption
-      }
-    ];
-    return assert.strictEqual(isOptionLegal('-d10', allOptions), false);
+    return assert.deepStrictEqual(getParserAndValidator('-c10', allOptions), { parser: parseCharOption, validator: offsetValidator });
   });
 });

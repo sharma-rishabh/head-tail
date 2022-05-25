@@ -5,7 +5,9 @@ const {
   getOptionsAndParsers,
   tailParse,
   parsePlus,
-  parseHyphen
+  parseHyphen,
+  offsetValidator,
+  legalOptionValidator
 } = require('../../src/tail/parseTail.js');
 
 const { createIterator } = require('../../src/tail/createIterator.js');
@@ -49,19 +51,23 @@ describe('getOptionsAndParsers', () => {
     return assert.deepStrictEqual(getOptionsAndParsers(), [
       {
         flag: '-n',
-        parser: parseLineOption
+        parser: parseLineOption,
+        validator: offsetValidator
       },
       {
         flag: '-c',
-        parser: parseCharOption
+        parser: parseCharOption,
+        validator: offsetValidator
       },
       {
         flag: '+',
-        parser: parsePlus
+        parser: parsePlus,
+        validator: legalOptionValidator
       },
       {
         flag: '-',
-        parser: parseHyphen
+        parser: parseHyphen,
+        validator: legalOptionValidator
       }
     ]);
   });
@@ -80,6 +86,18 @@ describe('tailParse', () => {
       files: ['a.txt', 'b.txt']
     });
   });
+  it('should return throw illegal offset error.', () => {
+    return assert.throws(() => tailParse(['-np', 'a.txt', 'b.txt']), {
+      name: 'illegalOffsetError',
+      message: 'tail: illegal offset -- p'
+    });
+  });
+  it('should return throw illegal option error.', () => {
+    return assert.throws(() => tailParse(['-ppap', 'a.txt', 'b.txt']), {
+      name: 'illegalOption',
+      message: 'tail: illegal option -- p\nusage: tail [-r] [-q] [-c # | -n #] [file ...]'
+    });
+  });
 });
 
 describe('parsePlus', () => {
@@ -87,29 +105,11 @@ describe('parsePlus', () => {
     const iterableArgs = createIterator(['+10']);
     return assert.deepStrictEqual(parsePlus(iterableArgs), { flag: '-n', count: '+10' });
   });
-  it('should throw an error if argument are not numbers', () => {
-    const iterableArgs = createIterator(['+p']);
-    return assert.throws(() => parsePlus(iterableArgs),
-      {
-        name: 'readFileError',
-        message: 'tail: +p:No such file or directory',
-        fileName: '+p'
-      }
-    );
-  });
 });
 
 describe('parseHyphen', () => {
   it('should parse an option which starts with hyphen.', () => {
     const iterableArgs = createIterator(['-10']);
     return assert.deepStrictEqual(parseHyphen(iterableArgs), { flag: '-n', count: '-10' });
-  });
-  it('should throw an error if argument are not numbers', () => {
-    const iterableArgs = createIterator(['-p']);
-    return assert.throws(() => parseHyphen(iterableArgs), {
-      name: 'illegalOption',
-      message: `'tail: illegal option -- p
-usage: tail [-r] [-q] [-c # | -n #] [file ...]`
-    });
   });
 });

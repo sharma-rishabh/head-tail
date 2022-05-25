@@ -1,10 +1,5 @@
 const { createIterator } = require('../tail/createIterator.js');
 
-const isOptionLegal = (option, allFlags) => {
-  const legalOption = allFlags.map((option) => option.flag);
-  return legalOption.some((flag) => option.includes(flag));
-};
-
 const isOption = (option) => {
   const hasAllDigits = /^\+\d+$/;
   return option.startsWith('-') || hasAllDigits.test(option);
@@ -14,11 +9,11 @@ const doesOptionContainFlag = (flagAndParser, currentOption) => {
   return currentOption.startsWith(flagAndParser.flag);
 };
 
-const getParser = (option, allFlags) => {
+const getParserAndValidator = (option, allFlags) => {
   const validOption = allFlags.find(
     (flag) => doesOptionContainFlag(flag, option)
   );
-  return validOption.parser;
+  return { parser: validOption.parser, validator: validOption.validator };
 };
 
 const parseArgs = (args, allFlags) => {
@@ -27,8 +22,10 @@ const parseArgs = (args, allFlags) => {
   const options = [];
 
   while (isOption(currentArg)) {
-    const parser = getParser(currentArg, allFlags);
-    options.push(parser(iterableArgs));
+    const { parser, validator } = getParserAndValidator(currentArg, allFlags);
+    const option = parser(iterableArgs);
+    validator(option);
+    options.push(option);
     currentArg = iterableArgs.nextElement();
   }
 
@@ -37,5 +34,4 @@ const parseArgs = (args, allFlags) => {
 };
 
 exports.parseArgs = parseArgs;
-exports.getParser = getParser;
-exports.isOptionLegal = isOptionLegal;
+exports.getParserAndValidator = getParserAndValidator;

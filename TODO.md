@@ -3,8 +3,6 @@
 - [ ] make `reverseContent` work.
 - [ ] make `noFormatting` work.
 - [ ] make `compileOptions`.
-- [ ] add validators for all flags in parseTail.
-- [ ] extract throw out `parseHyphen` to validate function and pass it as part of allOption.
 - [ ] create a closure for `parseLines` and `parseCount`.
 
 **MAYBE**
@@ -121,3 +119,5 @@
 - [x] make `tail` work for multiple files.
 - [x] use print functions in tail.
 - [x] change condition in `isOption`
+- [x] add validators for all flags in parseTail.
+- [x] extract throw out `parseHyphen` to validate function and pass it as part of allOption.
