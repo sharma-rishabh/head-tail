@@ -70,6 +70,30 @@ describe('parseArgs', () => {
       options: [{ flag: '-n', count: '+10' }]
     });
   });
+  it('should consider a plus not followed by a digit as a file', () => {
+    const allOptions = [
+      {
+        flag: '-n',
+        parser: parseLineOption
+      },
+      {
+        flag: '-c',
+        parser: parseCharOption
+      },
+      {
+        flag: '+',
+        parser: parsePlus
+      },
+      {
+        flag: '-',
+        parser: parseHyphen
+      }
+    ];
+    return assert.deepStrictEqual(parseArgs(['+p', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
+      files: ['+p', 'a.txt', 'b.txt'],
+      options: []
+    });
+  });
   it('should give all options in options array.', () => {
     const allOptions = [
       {

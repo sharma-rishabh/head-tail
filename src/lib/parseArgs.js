@@ -5,7 +5,10 @@ const isOptionLegal = (option, allFlags) => {
   return legalOption.some((flag) => option.includes(flag));
 };
 
-const isOption = (option) => option.startsWith('-') || option.startsWith('+');
+const isOption = (option) => {
+  const hasAllDigits = /^\+\d+$/;
+  return option.startsWith('-') || hasAllDigits.test(option);
+};
 
 const doesOptionContainFlag = (flagAndParser, currentOption) => {
   return currentOption.startsWith(flagAndParser.flag);

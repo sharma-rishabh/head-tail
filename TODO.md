@@ -4,7 +4,6 @@
 - [ ] make `noFormatting` work.
 - [ ] make `compileOptions`.
 - [ ] add validators for all flags in parseTail.
-- [ ] change condition in `isOption`
 - [ ] extract throw out `parseHyphen` to validate function and pass it as part of allOption.
 - [ ] create a closure for `parseLines` and `parseCount`.
 
@@ -121,3 +120,4 @@
 - [x] implement `formatContent`
 - [x] make `tail` work for multiple files.
 - [x] use print functions in tail.
+- [x] change condition in `isOption`
