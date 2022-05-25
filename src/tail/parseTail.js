@@ -15,7 +15,7 @@ const illegalOptionError = (option) => {
   return {
     name: 'illegalOption',
     message: `'tail: illegal option -- ${flag}
-usage:tail  [-r] [-q] [-c # | -n #] [file ...] `
+usage: tail [-r] [-q] [-c # | -n #] [file ...]`
   };
 };
 
@@ -91,3 +91,4 @@ exports.tailParse = tailParse;
 exports.illegalOptionError = illegalOptionError;
 exports.parseHyphen = parseHyphen;
 exports.parsePlus = parsePlus;
+exports.readFileError = readFileError;

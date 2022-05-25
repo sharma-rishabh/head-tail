@@ -1,8 +1,16 @@
 **TODO**
 
+- [ ] Investigate how slice handles negative indices.
+- [ ] make `reverseContent` work.
+- [ ] make `noFormatting` work.
+- [ ] make `compileOptions`.
+- [ ] add validators for all flags in parseTail.
+- [ ] change condition in `isOption`
+- [ ] extract throw out `parseHyphen` to validate function and pass it as part of allOption.
+- [ ] create a closure for `parseLines` and `parseCount`.
 - [ ] make `tail` work for multiple files.
 - [ ] use print functions in tail.
-- [ ] Connect `tail` with cl inputs.
+
 
 **MAYBE**
 
@@ -110,3 +118,6 @@
 - [x] move `parseArgs` to library.
 - [x] Add logic for `+|- num` option in `parseArgs`
 - [x] print correct usage for tail.
+- [x] Connect `tail` with cl inputs.
+- [x] implement `getFileContent`
+- [x] implement `headFile`
