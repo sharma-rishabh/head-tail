@@ -1,14 +1,18 @@
 const { splitBy, joinBy } = require('../lib/stringUtils.js');
 const { tailParse, readFileError } = require('./parseTail.js');
 
+const startsWithPlus = (string) => string.startsWith('+');
+const startsWithHyphen = (string) => string.startsWith('-');
+
+const formatContent = (content, fileName) => {
+  return `==>${fileName}<==\n${content}`;
+};
+
 const getReadError = (errorMessage) => {
   const codeAndMessage = errorMessage.split(': ');
   const message = codeAndMessage[1];
   return message.split(',')[0];
 };
-
-const startsWithPlus = (string) => string.startsWith('+');
-const startsWithHyphen = (string) => string.startsWith('-');
 
 const getStartIndex = (content, count) => {
   if (startsWithPlus(count)) {
@@ -49,7 +53,7 @@ const tailFile = (files, readFile, formatter, option) => {
     try {
       const content = getFileContent(readFile, fileName);
       const tailedContent = tail(content, count, delimiter);
-      const formattedContent = formatter(tailedContent);
+      const formattedContent = formatter(tailedContent, fileName);
       return { content: formattedContent, isError: false };
     } catch (error) {
       return { content: error.message, isError: true };
@@ -73,3 +77,4 @@ exports.extractData = extractData;
 exports.tailMain = tailMain;
 exports.getFileContent = getFileContent;
 exports.tailFile = tailFile;
+exports.formatContent = formatContent;

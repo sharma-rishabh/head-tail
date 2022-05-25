@@ -121,3 +121,4 @@
 - [x] implement `getFileContent`
 - [x] implement `headFile`
 - [x] Investigate how slice handles negative indices.
+- [x] implement `formatContent`
