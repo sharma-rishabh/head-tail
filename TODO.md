@@ -67,7 +67,6 @@
 
 **TODO**
 
-- [ ] refactor test for `parseArgs`.
 - [ ] refactor test for `extractValidOption`.
 - [ ] refactor test for `fileUtils`.
 
@@ -143,3 +142,4 @@
 - [x] Make `-num` special option work.
 - [x] Give appropriate error if byte count is invalid.
 - [x] refactor test for `lib` and `main`.
+- [x] refactor test for `parseArgs`.
