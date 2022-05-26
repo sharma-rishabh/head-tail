@@ -7,6 +7,7 @@ const { noFile, fileReadError } = require('./throwFunctions.js');
 const extractData = (array, numOfElements) => array.slice(0, +numOfElements);
 
 const getSeparator = (option) => option === '-n' ? '\n' : '';
+
 const identity = (content) => content;
 
 const head = (content, numOfLines, separator) => {
@@ -29,16 +30,19 @@ const formatOutput = (fileContent, fileName) => {
 const headMultipleFiles = (files, readFile, { option, count }, formatter) => {
   const separator = getSeparator(option);
   return files.map((file) => {
+    let fileContent;
+
     try {
-      const fileContent = getFileContent(readFile, file);
-      const headedContent = head(fileContent, count, separator);
-      const content = formatter(headedContent, file);
-      return { content, isError: false };
+      fileContent = getFileContent(readFile, file);
     } catch (error) {
       const content = error.message;
       const isError = true;
       return { content, isError };
     }
+
+    const headedContent = head(fileContent, count, separator);
+    const content = formatter(headedContent, file);
+    return { content, isError: false };
   });
 };
 
@@ -53,9 +57,12 @@ const getFileContent = (readFile, fileName) => {
 const headMain = (readFile, log, error, ...args) => {
   const { files, optionsArray } = parseArgs(args);
   const option = extractValidOption(optionsArray);
+
   assertFileExistence(files);
+
   const formatter = files.length > 1 ? formatOutput : identity;
   const headedContent = headMultipleFiles(files, readFile, option, formatter);
+
   printContent(headedContent, log, error);
 };
 

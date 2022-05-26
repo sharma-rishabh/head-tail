@@ -67,6 +67,10 @@
 
 **TODO**
 
+- [ ] refactor test for `parseArgs`.
+- [ ] refactor test for `extractValidOption`.
+- [ ] refactor test for `fileUtils`.
+
 **MAYBE**
 
 **DONE**
@@ -138,3 +142,4 @@
 - [x] Make headMain for multiple files.
 - [x] Make `-num` special option work.
 - [x] Give appropriate error if byte count is invalid.
+- [x] refactor test for `lib` and `main`.
