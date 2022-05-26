@@ -1,14 +1,73 @@
+# Tail
+
+
 **TODO**
 
+- [ ] pull the `startIndex` decision out of extract data to tailFiles.
 - [ ] make `reverseContent` work.
 - [ ] make `noFormatting` work.
 - [ ] make `compileOptions`.
 - [ ] create a closure for `parseLines` and `parseCount`.
-- [ ] Restructure `todo.md`
 - [ ] Restructure `readme.md`
 
 **MAYBE**
 
+
+**DONE**
+
+- [x] update `readme` with tail contract
+- [x] create a `testTailLib.js`
+- [x] create a `tailLib.js`.
+- [x] implement `tail`
+- [x] Extract `stringUtils`
+- [ ] ~~Extract `fileUtils`~~
+- [x] Extract throw objects to functions.
+- [x] Change contract of `headMultipleFiles` to accept a formatter.
+- [x] Extract `testFileUtils` in a separate functions.
+- [x] get rid of unnecessary code.
+- [x] Consider changing contract of parse args to not convert to number.
+- [x] change error of illegal option.
+- [x] add error for option required.
+- [x] Change directory structure to accommodate for `tail`
+- [x] make `extractData`
+- [x] Use `stringUtils` in tail.js
+- [x] implement `tailMain` for single file.
+- [x] make `testTailMain.js`
+- [x] make `tail` work for a single file.
+- [x] make `createIterator`
+- [x] Implement basic `parseArgs` to work with files.
+- [X] implement `getLegalOptions`.
+- [x] implement `parseLineOption`.
+- [x] implement `parseCountOption`.
+- [x] Implement `getOptionsAndParsers`.
+- [x] Implement `getParser`
+- [x] Change Name of `parseCountOption` to `parseCharOption`
+- [x] Make `parseArgs` for tail.
+- [x] `parseArgs` should throw and error if given option is illegal.
+- [x] Add parameter to `parseArgs` to accept allOptions.
+- [x] Create separate file for `parseTail`.
+- [x] move `parseArgs` to library.
+- [x] Add logic for `+|- num` option in `parseArgs`
+- [x] print correct usage for tail.
+- [x] Connect `tail` with cl inputs.
+- [x] implement `getFileContent`
+- [x] implement `headFile`
+- [x] Investigate how slice handles negative indices.
+- [x] implement `formatContent`
+- [x] make `tail` work for multiple files.
+- [x] use print functions in tail.
+- [x] change condition in `isOption`
+- [x] add validators for all flags in parseTail.
+- [x] extract throw out `parseHyphen` to validate function and pass it as part of allOption.
+- [x] Remove `return` from all tests.
+- [x] Restructure `todo.md`
+
+
+# Head
+
+**TODO**
+
+**MAYBE**
 
 **DONE**
 
@@ -79,48 +138,3 @@
 - [x] Make headMain for multiple files.
 - [x] Make `-num` special option work.
 - [x] Give appropriate error if byte count is invalid.
-- [x] update `readme` with tail contract
-- [x] create a `testTailLib.js`
-- [x] create a `tailLib.js`.
-- [x] implement `tail`
-- [x] Extract `stringUtils`
-- ~~[ ] Extract `fileUtils`~~
-- [x] Extract throw objects to functions.
-- [x] Change contract of `headMultipleFiles` to accept a formatter.
-- [x] Extract `testFileUtils` in a separate functions.
-- [x] get rid of unnecessary code.
-- [x] Consider changing contract of parse args to not convert to number.
-- [x] change error of illegal option.
-- [x] add error for option required.
-- [x] Change directory structure to accommodate for `tail`
-- [x] make `extractData`
-- [x] Use `stringUtils` in tail.js
-- [x] implement `tailMain` for single file.
-- [x] make `testTailMain.js`
-- [x] make `tail` work for a single file.
-- [x] make `createIterator`
-- [x] Implement basic `parseArgs` to work with files.
-- [X] implement `getLegalOptions`.
-- [x] implement `parseLineOption`.
-- [x] implement `parseCountOption`.
-- [x] Implement `getOptionsAndParsers`.
-- [x] Implement `getParser`
-- [x] Change Name of `parseCountOption` to `parseCharOption`
-- [x] Make `parseArgs` for tail.
-- [x] `parseArgs` should throw and error if given option is illegal.
-- [x] Add parameter to `parseArgs` to accept allOptions.
-- [x] Create separate file for `parseTail`.
-- [x] move `parseArgs` to library.
-- [x] Add logic for `+|- num` option in `parseArgs`
-- [x] print correct usage for tail.
-- [x] Connect `tail` with cl inputs.
-- [x] implement `getFileContent`
-- [x] implement `headFile`
-- [x] Investigate how slice handles negative indices.
-- [x] implement `formatContent`
-- [x] make `tail` work for multiple files.
-- [x] use print functions in tail.
-- [x] change condition in `isOption`
-- [x] add validators for all flags in parseTail.
-- [x] extract throw out `parseHyphen` to validate function and pass it as part of allOption.
-- [x] Remove `return` from all tests.
