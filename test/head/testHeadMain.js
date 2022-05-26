@@ -47,29 +47,29 @@ describe('headMain', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb');
     const mockedLog = mockLogger(['a\nb']);
     const mockedError = mockError([]);
-    return assert.strictEqual(headMain(mockedReadFile, mockedLog, mockedError, 'a.txt'), undefined);
+    assert.strictEqual(headMain(mockedReadFile, mockedLog, mockedError, 'a.txt'), undefined);
   });
   it('should take cl options and parse them as options object.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
     const mockedLog = mockLogger(['a\nb']);
     const mockedError = mockError([]);
-    return assert.strictEqual(headMain(mockedReadFile, mockedLog, mockedError, '-n', '2', 'a.txt'), undefined);
+    assert.strictEqual(headMain(mockedReadFile, mockedLog, mockedError, '-n', '2', 'a.txt'), undefined);
   });
   it('should take multiple files and apply head on them.', () => {
     const mockedReadFile = mockRFSMultiFile(['a.txt', 'b.txt'], ['a\nb', 'a']);
     const mockedLog = mockLogger(['==> a.txt <==\na\nb\n', '==> b.txt <==\na\n']);
     const mockedError = mockError([]);
-    return assert.strictEqual(headMain(mockedReadFile, mockedLog, mockedError, '-n', '2', 'a.txt', 'b.txt'), undefined);
+    assert.strictEqual(headMain(mockedReadFile, mockedLog, mockedError, '-n', '2', 'a.txt', 'b.txt'), undefined);
   });
   it('should throw an error if file is not present.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
     const mockedLog = mockLogger([]);
     const mockedError = mockError(['head: b.txt: No such file or directory']);
-    return assert.throws(() => headMain(mockedReadFile, mockedLog, mockedError, 'b.txt'), undefined);
+    assert.throws(() => headMain(mockedReadFile, mockedLog, mockedError, 'b.txt'), undefined);
   });
   it('should throw an error if no files are present.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
-    return assert.throws(() => headMain(mockedReadFile), {
+    assert.throws(() => headMain(mockedReadFile), {
       name: 'noFile',
       message: 'usage: head [-n lines | -c bytes] [file ...]'
     });

@@ -4,6 +4,8 @@
 - [ ] make `noFormatting` work.
 - [ ] make `compileOptions`.
 - [ ] create a closure for `parseLines` and `parseCount`.
+- [ ] Restructure `todo.md`
+- [ ] Restructure `readme.md`
 
 **MAYBE**
 
@@ -121,3 +123,4 @@
 - [x] change condition in `isOption`
 - [x] add validators for all flags in parseTail.
 - [x] extract throw out `parseHyphen` to validate function and pass it as part of allOption.
+- [x] Remove `return` from all tests.

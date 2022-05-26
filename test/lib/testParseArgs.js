@@ -26,7 +26,7 @@ describe('parseArgs', () => {
         parser: parseCharOption
       }
     ];
-    return assert.deepStrictEqual(parseArgs(['a.txt', 'b.txt'], allOptions, illegalOptionError), {
+    assert.deepStrictEqual(parseArgs(['a.txt', 'b.txt'], allOptions, illegalOptionError), {
       files: ['a.txt', 'b.txt'],
       options: []
     });
@@ -39,7 +39,7 @@ describe('parseArgs', () => {
         validator: offsetValidator
       }
     ];
-    return assert.deepStrictEqual(parseArgs(['-n10', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
+    assert.deepStrictEqual(parseArgs(['-n10', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
       files: ['a.txt', 'b.txt'],
       options: [{ flag: '-n', count: '10' }]
     });
@@ -52,7 +52,7 @@ describe('parseArgs', () => {
         validator: legalOptionValidator
       }
     ];
-    return assert.deepStrictEqual(parseArgs(['+10', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
+    assert.deepStrictEqual(parseArgs(['+10', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
       files: ['a.txt', 'b.txt'],
       options: [{ flag: '-n', count: '+10' }]
     });
@@ -65,7 +65,7 @@ describe('parseArgs', () => {
         validator: legalOptionValidator
       }
     ];
-    return assert.deepStrictEqual(parseArgs(['+p', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
+    assert.deepStrictEqual(parseArgs(['+p', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
       files: ['+p', 'a.txt', 'b.txt'],
       options: []
     });
@@ -84,7 +84,7 @@ describe('parseArgs', () => {
         validator: offsetValidator
       }
     ];
-    return assert.deepStrictEqual(parseArgs(['-n10', '-c', '10', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
+    assert.deepStrictEqual(parseArgs(['-n10', '-c', '10', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
       files: ['a.txt', 'b.txt'],
       options: [{ flag: '-n', count: '10' }, { flag: '-c', count: '10' }]
     });
@@ -98,7 +98,7 @@ describe('parseArgs', () => {
         validator: legalOptionValidator
       }
     ];
-    return assert.throws(() => parseArgs(['-d19', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
+    assert.throws(() => parseArgs(['-d19', 'a.txt', 'b.txt'], allOptions, illegalOptionError), {
       name: 'illegalOption',
       message: `tail: illegal option -- d
 usage: tail [-r] [-q] [-c # | -n #] [file ...]`});
@@ -119,7 +119,7 @@ describe('getParserAndValidator', () => {
         validator: offsetValidator
       }
     ];
-    return assert.deepStrictEqual(getParserAndValidator('-n10', allOptions), { parser: parseLineOption, validator: offsetValidator });
+    assert.deepStrictEqual(getParserAndValidator('-n10', allOptions), { parser: parseLineOption, validator: offsetValidator });
   });
   it('should should return parser for line.', () => {
     const allOptions = [
@@ -134,6 +134,6 @@ describe('getParserAndValidator', () => {
         validator: offsetValidator
       }
     ];
-    return assert.deepStrictEqual(getParserAndValidator('-c10', allOptions), { parser: parseCharOption, validator: offsetValidator });
+    assert.deepStrictEqual(getParserAndValidator('-c10', allOptions), { parser: parseCharOption, validator: offsetValidator });
   });
 });

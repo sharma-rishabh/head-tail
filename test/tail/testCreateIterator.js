@@ -4,11 +4,11 @@ const { createIterator } = require('../../src/tail/createIterator.js');
 describe('createIterator', () => {
   it('should return current index of the array', () => {
     const iterableArr = createIterator([1]);
-    return assert.strictEqual(iterableArr.index, 0);
+    assert.strictEqual(iterableArr.index, 0);
   });
   it('should return current argument of the array', () => {
     const iterableArr = createIterator([1]);
-    return assert.strictEqual(iterableArr.currentElement(), 1);
+    assert.strictEqual(iterableArr.currentElement(), 1);
   });
   it('should return next argument of the array', () => {
     const iterableArr = createIterator([1, 2]);

@@ -15,11 +15,11 @@ const { createIterator } = require('../../src/tail/createIterator.js');
 describe('parseLineOption', () => {
   it('Should parse an option whose values are separate.', () => {
     const iterableArgs = createIterator(['-n', '10']);
-    return assert.deepStrictEqual(parseLineOption(iterableArgs), { flag: '-n', count: '10' });
+    assert.deepStrictEqual(parseLineOption(iterableArgs), { flag: '-n', count: '10' });
   });
   it('Should parse an option whose values are integrated.', () => {
     const iterableArgs = createIterator(['-n10']);
-    return assert.deepStrictEqual(parseLineOption(iterableArgs), { flag: '-n', count: '10' });
+    assert.deepStrictEqual(parseLineOption(iterableArgs), { flag: '-n', count: '10' });
   });
   it('Should preserve signs for count provided by the user.', () => {
     const iterableArgs = createIterator(['-n+10', '-n-10']);
@@ -32,11 +32,11 @@ describe('parseLineOption', () => {
 describe('parseCharOption', () => {
   it('should parse an option whose values are separate', () => {
     const iterableArgs = createIterator(['-n', '10']);
-    return assert.deepStrictEqual(parseCharOption(iterableArgs), { flag: '-c', count: '10' });
+    assert.deepStrictEqual(parseCharOption(iterableArgs), { flag: '-c', count: '10' });
   });
   it('Should parse an option whose values are integrated.', () => {
     const iterableArgs = createIterator(['-n10']);
-    return assert.deepStrictEqual(parseCharOption(iterableArgs), { flag: '-c', count: '10' });
+    assert.deepStrictEqual(parseCharOption(iterableArgs), { flag: '-c', count: '10' });
   });
   it('Should preserve signs for count provided by the user.', () => {
     const iterableArgs = createIterator(['-n+10', '-n-10']);
@@ -48,7 +48,7 @@ describe('parseCharOption', () => {
 
 describe('getOptionsAndParsers', () => {
   it('should return all options and their parsers.', () => {
-    return assert.deepStrictEqual(getOptionsAndParsers(), [
+    assert.deepStrictEqual(getOptionsAndParsers(), [
       {
         flag: '-n',
         parser: parseLineOption,
@@ -75,25 +75,25 @@ describe('getOptionsAndParsers', () => {
 
 describe('tailParse', () => {
   it('should return parsed files for tail.', () => {
-    return assert.deepStrictEqual(tailParse(['a.txt', 'b.txt']), {
+    assert.deepStrictEqual(tailParse(['a.txt', 'b.txt']), {
       options: [],
       files: ['a.txt', 'b.txt']
     });
   });
   it('should return parsed option for tail.', () => {
-    return assert.deepStrictEqual(tailParse(['-n10', '-n', '10', 'a.txt', 'b.txt']), {
+    assert.deepStrictEqual(tailParse(['-n10', '-n', '10', 'a.txt', 'b.txt']), {
       options: [{ flag: '-n', count: '10' }, { flag: '-n', count: '10' }],
       files: ['a.txt', 'b.txt']
     });
   });
   it('should return throw illegal offset error.', () => {
-    return assert.throws(() => tailParse(['-np', 'a.txt', 'b.txt']), {
+    assert.throws(() => tailParse(['-np', 'a.txt', 'b.txt']), {
       name: 'illegalOffsetError',
       message: 'tail: illegal offset -- p'
     });
   });
   it('should return throw illegal option error.', () => {
-    return assert.throws(() => tailParse(['-ppap', 'a.txt', 'b.txt']), {
+    assert.throws(() => tailParse(['-ppap', 'a.txt', 'b.txt']), {
       name: 'illegalOption',
       message: 'tail: illegal option -- p\nusage: tail [-r] [-q] [-c # | -n #] [file ...]'
     });
@@ -103,13 +103,13 @@ describe('tailParse', () => {
 describe('parsePlus', () => {
   it('should parse an option which starts with plus', () => {
     const iterableArgs = createIterator(['+10']);
-    return assert.deepStrictEqual(parsePlus(iterableArgs), { flag: '-n', count: '+10' });
+    assert.deepStrictEqual(parsePlus(iterableArgs), { flag: '-n', count: '+10' });
   });
 });
 
 describe('parseHyphen', () => {
   it('should parse an option which starts with hyphen.', () => {
     const iterableArgs = createIterator(['-10']);
-    return assert.deepStrictEqual(parseHyphen(iterableArgs), { flag: '-n', count: '-10' });
+    assert.deepStrictEqual(parseHyphen(iterableArgs), { flag: '-n', count: '-10' });
   });
 });

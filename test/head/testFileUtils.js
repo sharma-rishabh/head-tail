@@ -23,11 +23,11 @@ const mockRFSMultiFile = (expectedFiles, contents) => {
 describe('getFileContent', () => {
   it('should return file content if file exists.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
-    return assert.strictEqual(getFileContent(mockedReadFile, 'a.txt'), 'a\nb\nc');
+    assert.strictEqual(getFileContent(mockedReadFile, 'a.txt'), 'a\nb\nc');
   });
   it('should throw error if file is invalid.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
-    return assert.throws(() => getFileContent(mockedReadFile, 'b.txt'), {
+    assert.throws(() => getFileContent(mockedReadFile, 'b.txt'), {
       name: 'fileReadError', message: 'head: b.txt: No such file or directory', fileName: 'b.txt'
     });
   });
@@ -35,10 +35,10 @@ describe('getFileContent', () => {
 
 describe('assertFileExistence', () => {
   it('should not throw an error if there are files in fileArray.', () => {
-    return assert.ok(assertFileExistence(['a.txt']));
+    assert.ok(assertFileExistence(['a.txt']));
   });
   it('should throw an error if there are no files in fileArray.', () => {
-    return assert.throws(() => assertFileExistence([]), {
+    assert.throws(() => assertFileExistence([]), {
       name: 'noFile',
       message: 'usage: head [-n lines | -c bytes] [file ...]'
     });
@@ -54,7 +54,7 @@ describe('headMultipleFiles', () => {
       { content: '==> b.txt <==\na\n', isError: false }
     ];
     const option = { option: '-n', count: '10' };
-    return assert.deepStrictEqual(headMultipleFiles(files, mockedReadFile, option, formatOutput), expected);
+    assert.deepStrictEqual(headMultipleFiles(files, mockedReadFile, option, formatOutput), expected);
   });
   it('should do head of multiple files and give error if some files don\'t exist', () => {
     const mockedReadFile = mockRFSMultiFile(['a.txt', 'b.txt'], ['a\nb', 'a']);
@@ -65,12 +65,12 @@ describe('headMultipleFiles', () => {
       { content: '==> b.txt <==\na\n', isError: false }
     ];
     const option = { option: '-n', count: '10' };
-    return assert.deepStrictEqual(headMultipleFiles(files, mockedReadFile, option, formatOutput), expected);
+    assert.deepStrictEqual(headMultipleFiles(files, mockedReadFile, option, formatOutput), expected);
   });
 });
 
 describe('formatOutput', () => {
   it('Should add a header to a file content', () => {
-    return assert.strictEqual(formatOutput('a\nb', 'a.txt'), '==> a.txt <==\na\nb\n');
+    assert.strictEqual(formatOutput('a\nb', 'a.txt'), '==> a.txt <==\na\nb\n');
   });
 });
