@@ -67,7 +67,6 @@
 
 **TODO**
 
-- [ ] refactor test for `fileUtils`.
 
 **MAYBE**
 
@@ -146,3 +145,4 @@
 - [x] change `optionsArray` to `options`
 - [s] change `option` to flag.
 - [x] refactor test for `extractValidOption`.
+- [x] refactor test for `fileUtils`.
