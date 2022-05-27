@@ -5,13 +5,13 @@ const differentOptions = () => {
   };
 };
 
-const invalidSwitch = (option) => {
-  const name = option.slice(1);
+const invalidSwitch = (flag) => {
+  const name = flag.slice(1);
   return {
     name: 'invalidSwitch',
     message: `head:illegal option -- ${name}
 usage: head [-n lines | -c bytes] [file ...]`,
-    option: option
+    flag
   };
 };
 

@@ -12,21 +12,21 @@ const isOptionIntegrated = (flag) => {
   return endWithDigits.test(flag);
 };
 
-const parseOption = (option, probableCount) => {
-  if (isSpecialOption(option)) {
+const parseOption = (flag, probableCount) => {
+  if (isSpecialOption(flag)) {
     return {
-      option: '-n',
-      count: option.slice(1)
+      flag: '-n',
+      count: flag.slice(1)
     };
   }
-  if (isOptionIntegrated(option)) {
+  if (isOptionIntegrated(flag)) {
     return {
-      option: extractOption(option),
-      count: extractCount(option)
+      flag: extractOption(flag),
+      count: extractCount(flag)
     };
   }
   return {
-    option: option,
+    flag: flag,
     count: probableCount
   };
 };
@@ -47,7 +47,7 @@ const parseArgs = (args) => {
   const files = args.slice(index);
 
   if (options.length === 0) {
-    options.push({ option: '-n', count: '10' });
+    options.push({ flag: '-n', count: '10' });
   }
 
   return { files, options };

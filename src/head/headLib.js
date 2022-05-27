@@ -10,7 +10,7 @@ const getExitCode = (headFiles) => {
 
 const extractData = (array, numOfElements) => array.slice(0, +numOfElements);
 
-const getSeparator = (option) => option === '-n' ? '\n' : '';
+const getSeparator = (flag) => flag === '-n' ? '\n' : '';
 
 const identity = (content) => content;
 
@@ -31,8 +31,8 @@ const formatOutput = (fileContent, fileName) => {
   return `==> ${fileName} <==\n${fileContent}\n`;
 };
 
-const headMultipleFiles = (files, readFile, { option, count }, formatter) => {
-  const separator = getSeparator(option);
+const headMultipleFiles = (files, readFile, { flag, count }, formatter) => {
+  const separator = getSeparator(flag);
   return files.map((file) => {
     let fileContent;
 

@@ -4,26 +4,26 @@ const { differentOptions,
   noArgument
 } = require('./throwFunctions.js');
 
-const switchSameAsPrev = ({ prevOption, sameAsPrev }, { option }) => {
+const switchSameAsPrev = ({ prevFlag, sameAsPrev }, { flag }) => {
   return {
-    sameAsPrev: prevOption === option && sameAsPrev,
-    prevOption: option
+    sameAsPrev: prevFlag === flag && sameAsPrev,
+    prevFlag: flag
   };
 };
 
 const areAllSwitchesSame = (options) => {
-  const prevOption = options[0].option;
+  const prevFlag = options[0].flag;
   const sameAsPrev = true;
-  const result = options.reduce(switchSameAsPrev, { prevOption, sameAsPrev });
+  const result = options.reduce(switchSameAsPrev, { prevFlag, sameAsPrev });
   return result.sameAsPrev;
 };
 
 const assertSwitchesValidity = (options) => {
-  const validOptions = ['-c', '-n'];
+  const validFlags = ['-c', '-n'];
   for (let index = 0; index < options.length; index++) {
     const option = options[index];
-    if (!validOptions.includes(option.option)) {
-      throw invalidSwitch(option.option);
+    if (!validFlags.includes(option.flag)) {
+      throw invalidSwitch(option.flag);
     }
   }
   return true;
@@ -38,9 +38,9 @@ const validateOptions = (options) => {
 };
 
 const assertLineCountValidity = (option) => {
-  const optionName = option.option === '-n' ? 'line' : 'byte';
+  const optionName = option.flag === '-n' ? 'line' : 'byte';
   if (option.count === undefined) {
-    throw noArgument(option.option);
+    throw noArgument(option.flag);
   }
   if (option.count < 1 || isNaN(option.count)) {
     throw illegalLineCount(optionName, option.count);
