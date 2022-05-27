@@ -36,21 +36,21 @@ const extractCount = (integratedOption) => integratedOption.slice(2);
 
 const parseArgs = (args) => {
   let index = 0;
-  const optionsArray = [];
+  const options = [];
 
   while (index < args.length && isOption(args[index])) {
     const currentOption = parseOption(args[index], args[index + 1]);
-    optionsArray.push(currentOption);
+    options.push(currentOption);
     index += isOptionIntegrated(args[index]) ? 1 : 2;
   }
 
   const files = args.slice(index);
 
-  if (optionsArray.length === 0) {
-    optionsArray.push({ option: '-n', count: '10' });
+  if (options.length === 0) {
+    options.push({ option: '-n', count: '10' });
   }
 
-  return { files, optionsArray };
+  return { files, options };
 };
 
 exports.parseArgs = parseArgs;

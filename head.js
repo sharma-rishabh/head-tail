@@ -4,10 +4,15 @@ const fs = require('fs');
 
 const main = () => {
   try {
-    headMain(fs.readFileSync, log, error, ...process.argv.slice(2));
+    process.exitCode = headMain(
+      fs.readFileSync,
+      log,
+      error,
+      ...process.argv.slice(2)
+    );
   } catch (err) {
     error(err.message);
-    process.exit(1);
+    process.exitCode = 1;
   }
 };
 

@@ -20,8 +20,8 @@ const head = (content, numOfLines, separator) => {
   return joinBy(requiredContent, separator);
 };
 
-const assertFileExistence = (fileArray) => {
-  if (fileArray.length === 0) {
+const assertFileExistence = (files) => {
+  if (files.length === 0) {
     throw noFile();
   }
   return true;
@@ -59,8 +59,8 @@ const getFileContent = (readFile, fileName) => {
 };
 
 const headMain = (readFile, log, error, ...args) => {
-  const { files, optionsArray } = parseArgs(args);
-  const option = extractValidOption(optionsArray);
+  const { files, options } = parseArgs(args);
+  const option = extractValidOption(options);
 
   assertFileExistence(files);
 

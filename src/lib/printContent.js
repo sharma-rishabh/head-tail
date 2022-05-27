@@ -1,17 +1,11 @@
-const printContent = (contentArray, log, error) => {
-  contentArray.forEach((headOutput) => {
-    if (headOutput.isError) {
-      error(headOutput.content);
+const printContent = (contents, log, error) => {
+  contents.forEach((content) => {
+    if (content.isError) {
+      error(content.content);
     } else {
-      log(headOutput.content);
+      log(content.content);
     }
   });
-  // if (contentArray.some((headOutput) => headOutput.isError)) {
-  //   throw {
-  //     name: 'someFilesDontExist',
-  //     message: ''
-  //   };
-  // }
 };
 
 exports.printContent = printContent;

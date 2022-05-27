@@ -69,6 +69,7 @@
 
 - [ ] refactor test for `extractValidOption`.
 - [ ] refactor test for `fileUtils`.
+- [ ] change `option` to flag.
 
 **MAYBE**
 
@@ -144,3 +145,4 @@
 - [x] refactor test for `lib` and `main`.
 - [x] refactor test for `parseArgs`.
 - [x] changed contract of `headMain` to return the exit code.
+- [x] change `optionsArray` to `options`
