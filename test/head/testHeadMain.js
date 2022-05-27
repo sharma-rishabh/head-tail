@@ -39,8 +39,9 @@ describe('headMain', () => {
 
     const actual = headMain(mockedReadFile, mockedLog, mockedError, 'a.txt');
 
-    assert.strictEqual(actual, undefined);
+    assert.strictEqual(actual, 0);
   });
+
   it('should take cl options and parse them as options object.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
     const mockedLog = mockLogger(['a\nb']);
@@ -52,8 +53,9 @@ describe('headMain', () => {
       '-n', '2', 'a.txt'
     );
 
-    assert.strictEqual(actual, undefined);
+    assert.strictEqual(actual, 0);
   });
+
   it('should take multiple files and apply head on them.', () => {
     const mockedReadFile = mockRFSMultiFile(['a.txt', 'b.txt'], ['a\nb', 'a']);
     const mockedLog = mockLogger(
@@ -70,18 +72,20 @@ describe('headMain', () => {
       '-n', '2', 'a.txt', 'b.txt'
     );
 
-    assert.strictEqual(actual, undefined);
+    assert.strictEqual(actual, 0);
   });
+
   it('should throw an error if file is not present.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
     const mockedLog = mockLogger([]);
     const mockedError = mockLogger(['head: b.txt: No such file or directory']);
 
-    assert.throws(
-      () => headMain(mockedReadFile, mockedLog, mockedError, 'b.txt'),
-      undefined
+    assert.strictEqual(
+      headMain(mockedReadFile, mockedLog, mockedError, 'b.txt'),
+      1
     );
   });
+
   it('should throw an error if no files are present.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc');
     const expectedError = {

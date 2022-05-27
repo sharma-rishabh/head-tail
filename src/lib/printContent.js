@@ -6,12 +6,12 @@ const printContent = (contentArray, log, error) => {
       log(headOutput.content);
     }
   });
-  if (contentArray.some((headOutput) => headOutput.isError)) {
-    throw {
-      name: 'someFilesDontExist',
-      message: ''
-    };
-  }
+  // if (contentArray.some((headOutput) => headOutput.isError)) {
+  //   throw {
+  //     name: 'someFilesDontExist',
+  //     message: ''
+  //   };
+  // }
 };
 
 exports.printContent = printContent;

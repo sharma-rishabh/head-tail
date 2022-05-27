@@ -4,6 +4,10 @@ const { printContent } = require('../lib/printContent.js');
 const { splitBy, joinBy } = require('../lib/stringUtils.js');
 const { noFile, fileReadError } = require('./throwFunctions.js');
 
+const getExitCode = (headFiles) => {
+  return headFiles.some((headFile) => headFile.isError) ? 1 : 0;
+};
+
 const extractData = (array, numOfElements) => array.slice(0, +numOfElements);
 
 const getSeparator = (option) => option === '-n' ? '\n' : '';
@@ -61,9 +65,11 @@ const headMain = (readFile, log, error, ...args) => {
   assertFileExistence(files);
 
   const formatter = files.length > 1 ? formatOutput : identity;
-  const headedContent = headMultipleFiles(files, readFile, option, formatter);
+  const headFiles = headMultipleFiles(files, readFile, option, formatter);
 
-  printContent(headedContent, log, error);
+  printContent(headFiles, log, error);
+
+  return getExitCode(headFiles);
 };
 
 exports.extractData = extractData;

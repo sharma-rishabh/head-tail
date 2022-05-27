@@ -143,3 +143,4 @@
 - [x] Give appropriate error if byte count is invalid.
 - [x] refactor test for `lib` and `main`.
 - [x] refactor test for `parseArgs`.
+- [x] changed contract of `headMain` to return the exit code.
