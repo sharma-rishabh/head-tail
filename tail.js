@@ -4,10 +4,15 @@ const { log, error } = require('console');
 
 const main = () => {
   try {
-    tailMain(fs.readFileSync, log, error, ...process.argv.slice(2));
+    process.exitCode = tailMain(
+      fs.readFileSync,
+      log,
+      error,
+      ...process.argv.slice(2)
+    );
   } catch (err) {
     error(err.message);
-    process.exit(1);
+    process.exitCode(1);
   }
 };
 

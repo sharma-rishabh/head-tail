@@ -48,13 +48,19 @@ describe('tailMain', () => {
     const mockedReadFile = mockReadFile('a.txt', 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk');
     const mockedLog = mockLogger(['b\nc\nd\ne\nf\ng\nh\ni\nj\nk']);
     const mockedError = mockLogger([]);
-    assert.strictEqual(tailMain(mockedReadFile, mockedLog, mockedError, 'a.txt'), undefined);
+    assert.strictEqual(tailMain(mockedReadFile, mockedLog, mockedError, 'a.txt'), 0);
   });
   it('should use given options to tail the given file.', () => {
     const mockedReadFile = mockRFSMultiFile(['a.txt', 'b.txt'], ['a\nb', 'a\nc']);
     const mockedLog = mockLogger(['==>a.txt<==\nb', '==>b.txt<==\nc']);
     const mockedError = mockLogger([]);
-    assert.strictEqual(tailMain(mockedReadFile, mockedLog, mockedError, '-n', '1', 'a.txt', 'b.txt'), undefined);
+    assert.strictEqual(tailMain(mockedReadFile, mockedLog, mockedError, '-n', '1', 'a.txt', 'b.txt'), 0);
+  });
+  it('should put error on error stream if file doesn\'t exist.', () => {
+    const mockedReadFile = mockRFSMultiFile(['a.txt'], ['a\nb', 'a\nc']);
+    const mockedLog = mockLogger([]);
+    const mockedError = mockLogger(['tail: b.txt:no such file or directory']);
+    assert.strictEqual(tailMain(mockedReadFile, mockedLog, mockedError, '-n', '1', 'b.txt'), 1);
   });
 });
 

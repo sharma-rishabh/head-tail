@@ -9,6 +9,7 @@
 - [ ] make `compileOptions`.
 - [ ] create a closure for `parseLines` and `parseCount`.
 - [ ] Restructure `readme.md`
+- [ ] refactor headMain.
 
 **MAYBE**
 
@@ -61,6 +62,7 @@
 - [x] extract throw out `parseHyphen` to validate function and pass it as part of allOption.
 - [x] Remove `return` from all tests.
 - [x] Restructure `todo.md`
+- [x] change contract of `tailMain`.
 
 
 # Head
