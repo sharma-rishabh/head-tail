@@ -26,7 +26,6 @@ const assertSwitchesValidity = (options) => {
       throw invalidSwitch(option.flag);
     }
   }
-  return true;
 };
 
 const validateOptions = (options) => {
@@ -45,7 +44,6 @@ const assertLineCountValidity = (option) => {
   if (option.count < 1 || isNaN(option.count)) {
     throw illegalLineCount(optionName, option.count);
   }
-  return true;
 };
 
 const extractValidOption = (options) => {

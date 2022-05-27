@@ -67,7 +67,6 @@
 
 **TODO**
 
-- [ ] refactor test for `extractValidOption`.
 - [ ] refactor test for `fileUtils`.
 
 **MAYBE**
@@ -146,3 +145,4 @@
 - [x] changed contract of `headMain` to return the exit code.
 - [x] change `optionsArray` to `options`
 - [s] change `option` to flag.
+- [x] refactor test for `extractValidOption`.

@@ -59,57 +59,96 @@ describe('areAllSwitchesSame', () => {
   it('should return true if all given options have same switch.', () => {
     assert.strictEqual(areAllSwitchesSame([{ flag: '-n', count: 10 }]), true);
   });
-  it('should return false if all given options don\'t have same switch.', () => {
-    assert.strictEqual(areAllSwitchesSame([{ flag: '-n', count: 10 }, { flag: '-c', count: 10 }]), false);
+
+  it('should work if given options don\'t have same switch.', () => {
+    const actual = areAllSwitchesSame(
+      [
+        { flag: '-n', count: 10 },
+        { flag: '-c', count: 10 }
+      ]
+    );
+
+    assert.strictEqual(actual, false);
   });
 });
 
 describe('assertSwitchesValidity', () => {
   it('should not throw error if all switches are valid.', () => {
-    assert.ok(assertSwitchesValidity([{ flag: '-n', count: 10 }, { flag: '-c', count: 10 }]));
+    const actual = assertSwitchesValidity(
+      [
+        { flag: '-n', count: 10 },
+        { flag: '-c', count: 10 }
+      ]
+    );
+
+    assert.strictEqual(actual, undefined);
   });
+
   it('should throw error if all switches are not valid.', () => {
-    assert.throws(() => assertSwitchesValidity([{ flag: '-d', count: 10 }, { flag: '-c', count: 10 }]), {
+    const expectedError = {
       name: 'invalidSwitch',
       message: 'head:illegal option -- d\nusage: head [-n lines | -c bytes] [file ...]',
       flag: '-d'
-    });
+    };
+
+    const input = [
+      { flag: '-d', count: 10 },
+      { flag: '-c', count: 10 }
+    ];
+
+    assert.throws(() => assertSwitchesValidity(input), expectedError);
   });
 });
 
 describe('assertLineCountValidity', () => {
   it('should not throw an error if line count is valid.', () => {
-    assert.ok(assertLineCountValidity({ flag: '-n', count: '10' }));
+    const actual = assertLineCountValidity({ flag: '-n', count: '10' });
+    assert.strictEqual(actual, undefined);
   });
 
   it('should throw throw an error if line count is valid.', () => {
-    assert.throws(() => assertLineCountValidity({ flag: '-n', count: 0 }), {
+    const input = { flag: '-n', count: 0 };
+
+    const expectedError = {
       name: 'illegallineCount',
       message: 'head: illegal line count -- 0',
       count: 0
-    });
+    };
+
+    assert.throws(() => assertLineCountValidity(input), expectedError);
   });
 
   it('should throw throw an error if byte count is valid.', () => {
-    assert.throws(() => assertLineCountValidity({ flag: '-c', count: 0 }), {
+    const input = { flag: '-c', count: 0 };
+    const expectedError = {
       name: 'illegalbyteCount',
       message: 'head: illegal byte count -- 0',
       count: 0
-    });
+    };
+
+    assert.throws(() => assertLineCountValidity(input), expectedError);
   });
 
   it('should  throw an error if line count is not present.', () => {
-    assert.throws(() => assertLineCountValidity({ flag: '-n', count: NaN }), {
+    const input = { flag: '-n', count: NaN };
+
+    const expectedError = {
       name: 'illegallineCount',
       message: 'head: illegal line count -- NaN',
       count: NaN
-    });
+    };
+
+    assert.throws(() => assertLineCountValidity(input), expectedError);
   });
 
   it('should throw an error that -n needs an option.', () => {
-    assert.throws(() => assertLineCountValidity({ flag: '-n', count: undefined }), {
+    const input = { flag: '-n', count: undefined };
+
+    const expectedError = {
       name: 'needArgument',
       message: 'head: option requires an argument -- n\nusage: head[-n lines | -c bytes][file ...]'
-    });
+    };
+
+    assert.throws(() => assertLineCountValidity(input), expectedError);
   });
 });
