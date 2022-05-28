@@ -63,6 +63,7 @@
 - [x] Restructure `todo.md`
 - [x] change contract of `tailMain`.
 - [x] pull the `startIndex` decision out of `extract data` to `tail`.
+- [x] remove dependency of `content` from `startIndex`
 
 
 # Head

@@ -6,7 +6,7 @@ const getExitCode = (headFiles) => {
   return headFiles.some((headFile) => headFile.isError) ? 1 : 0;
 };
 
-const startsWithPlus = (string) => string.startsWith('+');
+const isPositive = (string) => string.startsWith('+');
 const startsWithHyphen = (string) => string.startsWith('-');
 
 const formatContent = (content, fileName) => {
@@ -21,14 +21,15 @@ const getReadError = (errorMessage) => {
   return message.split(',')[0];
 };
 
-const getStartIndex = (content, count) => {
-  if (startsWithPlus(count)) {
-    return +count === 0 ? +count : +count - 1;
+const getNegativeStartIndex = (count) => {
+  if (+count === 0) {
+    return Infinity;
   }
-  if (startsWithHyphen(count)) {
-    return +count === 0 ? content.length : +count;
-  }
-  return -count;
+  return startsWithHyphen(count) ? +count : -count;
+};
+
+const getStartIndex = (count) => {
+  return isPositive(count) ? +count : getNegativeStartIndex(count);
 };
 
 const extractData = (content, startIndex) => {
@@ -37,7 +38,7 @@ const extractData = (content, startIndex) => {
 
 const tail = (content, count, delimiter) => {
   const splitContent = splitBy(content, delimiter);
-  const startIndex = getStartIndex(splitContent, count);
+  const startIndex = getStartIndex(count);
   const requiredContent = extractData(splitContent, startIndex);
   return joinBy(requiredContent, delimiter);
 };
