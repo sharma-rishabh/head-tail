@@ -36,9 +36,8 @@ const extractData = (content, startIndex) => {
   return content.slice(startIndex);
 };
 
-const tail = (content, count, delimiter) => {
+const tail = (content, startIndex, delimiter) => {
   const splitContent = splitBy(content, delimiter);
-  const startIndex = getStartIndex(count);
   const requiredContent = extractData(splitContent, startIndex);
   return joinBy(requiredContent, delimiter);
 };
@@ -56,7 +55,8 @@ const getFileContent = (readFile, fileName) => {
 
 const tailFile = (files, readFile, formatter, option) => {
   const delimiter = getDelimiter(option.flag);
-  const count = option.count;
+  const startIndex = getStartIndex(option.count);
+
   return files.map((fileName) => {
     let content;
 
@@ -66,7 +66,7 @@ const tailFile = (files, readFile, formatter, option) => {
       return { content: error.message, isError: true };
     }
 
-    const tailedContent = tail(content, count, delimiter);
+    const tailedContent = tail(content, startIndex, delimiter);
     const formattedContent = formatter(tailedContent, fileName);
     return { content: formattedContent, isError: false };
   });
