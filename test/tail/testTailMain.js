@@ -67,13 +67,22 @@ describe('tailMain', () => {
 describe('getFileContent', () => {
   it('should return content if file exist.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'abc');
-    assert.strictEqual(getFileContent(mockedReadFile, 'a.txt'), 'abc');
+    assert.deepStrictEqual(
+      getFileContent(mockedReadFile, 'a.txt'),
+      { content: 'abc', fileName: 'a.txt' }
+    );
   });
+
   it('should throw error if file doesn\'t exist.', () => {
     const mockedReadFile = mockReadFile('a.txt', 'abc');
-    assert.throws(() => getFileContent(mockedReadFile, 'b.txt'), {
+    const expectedError = {
       name: 'readFileError',
       message: 'tail: b.txt:no such file or directory',
+      fileName: 'b.txt'
+    };
+
+    assert.deepStrictEqual(getFileContent(mockedReadFile, 'b.txt'), {
+      error: expectedError,
       fileName: 'b.txt'
     });
   });

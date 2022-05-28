@@ -55,10 +55,12 @@ const getSlicer = (flag) => flag === '-n' ? lastNLines : lastNBytes;
 
 const getFileContent = (readFile, fileName) => {
   try {
-    return readFile(fileName, 'utf8');
+    const content = readFile(fileName, 'utf8');
+    return { fileName, content };
   } catch (error) {
     const message = getReadError(error.message);
-    throw readFileError(fileName, message);
+    const err = readFileError(fileName, message);
+    return { fileName, error: err };
   }
 };
 
@@ -67,16 +69,16 @@ const tailFile = (files, readFile, formatter, option) => {
   const startIndex = getStartIndex(option.count);
 
   return files.map((fileName) => {
-    let content;
+    const readResult = getFileContent(readFile, fileName);
 
-    try {
-      content = getFileContent(readFile, fileName);
-    } catch (error) {
-      return { content: error.message, isError: true };
+    if (readResult.error) {
+      return { content: readResult.error.message, isError: true };
     }
 
+    const content = readResult.content;
     const tailedContent = slicer(content, startIndex);
     const formattedContent = formatter(tailedContent, fileName);
+
     return { content: formattedContent, isError: false };
   });
 };

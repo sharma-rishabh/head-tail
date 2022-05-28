@@ -67,6 +67,7 @@
 - [x] extract decision of `startIndex` from `tail` to `tailFiles`
 - [x] remove `delimiter`.
 - [x] create separate functions for `lastNLines` and `lastNBytes`
+- [x] change contract of `getFileContent` to return object.
 
 
 # Head
