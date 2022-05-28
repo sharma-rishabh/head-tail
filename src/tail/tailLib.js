@@ -31,14 +31,14 @@ const getStartIndex = (content, count) => {
   return -count;
 };
 
-const extractData = (content, count) => {
-  const startIndex = getStartIndex(content, count);
+const extractData = (content, startIndex) => {
   return content.slice(startIndex);
 };
 
 const tail = (content, count, delimiter) => {
   const splitContent = splitBy(content, delimiter);
-  const requiredContent = extractData(splitContent, count);
+  const startIndex = getStartIndex(splitContent, count);
+  const requiredContent = extractData(splitContent, startIndex);
   return joinBy(requiredContent, delimiter);
 };
 

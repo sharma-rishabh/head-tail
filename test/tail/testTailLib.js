@@ -25,18 +25,18 @@ describe('tail', () => {
 
 describe('extractData', () => {
   it('should give last n elements of given content', () => {
-    assert.deepStrictEqual(extractData(['a', 'b', 'c', 'd'], '2'), ['c', 'd']);
+    assert.deepStrictEqual(extractData(['a', 'b', 'c', 'd'], 2), ['c', 'd']);
   });
   it('should give elements of given content starting from count if it is preceded by \'+\'', () => {
-    assert.deepStrictEqual(extractData(['a', 'b', 'c', 'd'], '+2'), ['b', 'c', 'd']);
+    assert.deepStrictEqual(extractData(['a', 'b', 'c', 'd'], 1), ['b', 'c', 'd']);
   });
   it('should give all elements of given content if count is +0', () => {
-    assert.deepStrictEqual(extractData(['a', 'b', 'c', 'd'], '+0'), ['a', 'b', 'c', 'd']);
+    assert.deepStrictEqual(extractData(['a', 'b', 'c', 'd'], 0), ['a', 'b', 'c', 'd']);
   });
   it('should give last n elements of given content if count is -n', () => {
-    assert.deepStrictEqual(extractData(['a', 'b', 'c', 'd'], '-1'), ['d']);
+    assert.deepStrictEqual(extractData(['a', 'b', 'c', 'd'], -1), ['d']);
   });
   it('should give 0 elements of given content if count is -0', () => {
-    assert.deepStrictEqual(extractData(['a', 'b', 'c', 'd'], '-0'), []);
+    assert.deepStrictEqual(extractData(['a', 'b', 'c', 'd'], Infinity), []);
   });
 });

@@ -3,13 +3,12 @@
 
 **TODO**
 
-- [ ] pull the `startIndex` decision out of extract data to tailFiles.
 - [ ] make `reverseContent` work.
 - [ ] make `noFormatting` work.
 - [ ] make `compileOptions`.
 - [ ] create a closure for `parseLines` and `parseCount`.
 - [ ] Restructure `readme.md`
-- [ ] refactor headMain.
+- [ ] refactor tailMain.
 
 **MAYBE**
 
@@ -63,6 +62,7 @@
 - [x] Remove `return` from all tests.
 - [x] Restructure `todo.md`
 - [x] change contract of `tailMain`.
+- [x] pull the `startIndex` decision out of `extract data` to `tail`.
 
 
 # Head
