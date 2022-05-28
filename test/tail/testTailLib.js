@@ -1,45 +1,38 @@
 const assert = require('assert');
-const { tail, extractData } = require('../../src/tail/tailLib.js');
+const { lastNLines, lastNBytes } = require('../../src/tail/tailLib.js');
 
-describe('tail', () => {
-  it('should give the all lines of the given content', () => {
-    const content = '1\n2\n3\n4';
-    assert.strictEqual(tail(content, -10, '\n'), content);
+describe('lastNLines', () => {
+  it('should give same content if  index is same as content length.', () => {
+    assert.strictEqual(lastNLines('a', 0), 'a');
   });
 
-  it('should give the ten lines of the given content', () => {
-    const content = '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11';
-    const expected = '2\n3\n4\n5\n6\n7\n8\n9\n10\n11';
-    assert.strictEqual(tail(content, -10, '\n'), expected);
+  it('should give last lines starting from index if it is positive.', () => {
+    assert.strictEqual(lastNLines('a\nb\nc', 1), 'b\nc');
   });
 
-  it('should give the specified lines of the given content', () => {
-    const content = '1\n2\n3\n4';
-    const expected = '3\n4';
-    assert.strictEqual(tail(content, 2, '\n'), expected);
+  it('should give last n lines of content if index is negative.', () => {
+    assert.strictEqual(lastNLines('a\nb\nc', -1), 'c');
   });
 
-  it('should give the specified character of the given content', () => {
-    const content = '1\n2\n3\n4';
-    const expected = '\n4';
-    assert.strictEqual(tail(content, -2, ''), expected);
+  it('should give last no lines if index is Infinity.', () => {
+    assert.strictEqual(lastNLines('a\nb\nc', Infinity), '');
   });
 });
 
-describe('extractData', () => {
-  it('should give last n elements of given content', () => {
-    assert.deepStrictEqual(extractData(['a', 'b', 'c', 'd'], 2), ['c', 'd']);
+describe('lastNBytes', () => {
+  it('should give same content if  index is same as content length.', () => {
+    assert.strictEqual(lastNBytes('a', 0), 'a');
   });
-  it('should give elements of given content starting from count if it is preceded by \'+\'', () => {
-    assert.deepStrictEqual(extractData(['a', 'b', 'c', 'd'], 1), ['b', 'c', 'd']);
+
+  it('should give last chars starting from index if it is positive.', () => {
+    assert.strictEqual(lastNBytes('a\nb\nc', 1), '\nb\nc');
   });
-  it('should give all elements of given content if count is +0', () => {
-    assert.deepStrictEqual(extractData(['a', 'b', 'c', 'd'], 0), ['a', 'b', 'c', 'd']);
+
+  it('should give last n chars of content if index is negative.', () => {
+    assert.strictEqual(lastNBytes('a\nb\nc', -1), 'c');
   });
-  it('should give last n elements of given content if count is -n', () => {
-    assert.deepStrictEqual(extractData(['a', 'b', 'c', 'd'], -1), ['d']);
-  });
-  it('should give 0 elements of given content if count is -0', () => {
-    assert.deepStrictEqual(extractData(['a', 'b', 'c', 'd'], Infinity), []);
+
+  it('should give last no chars if index is Infinity.', () => {
+    assert.strictEqual(lastNBytes('a\nb\nc', Infinity), '');
   });
 });

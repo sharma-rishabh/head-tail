@@ -9,18 +9,6 @@ const getExitCode = (headFiles) => {
 const isPositive = (string) => string.startsWith('+');
 const startsWithHyphen = (string) => string.startsWith('-');
 
-const formatContent = (content, fileName) => {
-  return `==>${fileName}<==\n${content}`;
-};
-
-const identity = (value) => value;
-
-const getReadError = (errorMessage) => {
-  const codeAndMessage = errorMessage.split(': ');
-  const message = codeAndMessage[1];
-  return message.split(',')[0];
-};
-
 const getNegativeStartIndex = (count) => {
   if (+count === 0) {
     return Infinity;
@@ -28,21 +16,42 @@ const getNegativeStartIndex = (count) => {
   return startsWithHyphen(count) ? +count : -count;
 };
 
-const getStartIndex = (count) => {
-  return isPositive(count) ? +count : getNegativeStartIndex(count);
+const getPositiveIndex = (count) => {
+  return +count === 0 ? 0 : +count - 1;
 };
 
-const extractData = (content, startIndex) => {
-  return content.slice(startIndex);
+const getStartIndex = (count) =>
+  isPositive(count) ? getPositiveIndex(count) : getNegativeStartIndex(count);
+
+const formatContent = (content, fileName) => {
+  return `==>${fileName}<==\n${content}`;
 };
 
-const tail = (content, startIndex, delimiter) => {
-  const splitContent = splitBy(content, delimiter);
-  const requiredContent = extractData(splitContent, startIndex);
-  return joinBy(requiredContent, delimiter);
+const identity = (value) => value;
+
+const getFormatter = (files) => {
+  return files.length > 1 ? formatContent : identity;
 };
 
-const getDelimiter = (flag) => flag === '-n' ? '\n' : '';
+const lastNLines = (content, startIndex) => {
+  const lines = splitBy(content, '\n');
+  const requiredLines = lines.slice(startIndex);
+  return joinBy(requiredLines, '\n');
+};
+
+const lastNBytes = (content, startIndex) => {
+  const lines = splitBy(content, '');
+  const requiredLines = lines.slice(startIndex);
+  return joinBy(requiredLines, '');
+};
+
+const getReadError = (errorMessage) => {
+  const codeAndMessage = errorMessage.split(': ');
+  const message = codeAndMessage[1];
+  return message.split(',')[0];
+};
+
+const getSlicer = (flag) => flag === '-n' ? lastNLines : lastNBytes;
 
 const getFileContent = (readFile, fileName) => {
   try {
@@ -54,7 +63,7 @@ const getFileContent = (readFile, fileName) => {
 };
 
 const tailFile = (files, readFile, formatter, option) => {
-  const delimiter = getDelimiter(option.flag);
+  const slicer = getSlicer(option.flag);
   const startIndex = getStartIndex(option.count);
 
   return files.map((fileName) => {
@@ -66,14 +75,10 @@ const tailFile = (files, readFile, formatter, option) => {
       return { content: error.message, isError: true };
     }
 
-    const tailedContent = tail(content, startIndex, delimiter);
+    const tailedContent = slicer(content, startIndex);
     const formattedContent = formatter(tailedContent, fileName);
     return { content: formattedContent, isError: false };
   });
-};
-
-const getFormatter = (files) => {
-  return files.length > 1 ? formatContent : identity;
 };
 
 const compileOptions = (options) =>
@@ -84,14 +89,15 @@ const tailMain = (readFile, log, error, ...args) => {
   const option = compileOptions(options);
   const formatter = getFormatter(files);
   const tailedFiles = tailFile(files, readFile, formatter, option);
+
   printContent(tailedFiles, log, error);
 
   return getExitCode(tailedFiles);
 };
 
-exports.tail = tail;
-exports.extractData = extractData;
 exports.tailMain = tailMain;
 exports.getFileContent = getFileContent;
 exports.tailFile = tailFile;
 exports.formatContent = formatContent;
+exports.lastNLines = lastNLines;
+exports.lastNBytes = lastNBytes;

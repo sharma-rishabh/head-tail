@@ -65,6 +65,8 @@
 - [x] pull the `startIndex` decision out of `extract data` to `tail`.
 - [x] remove dependency of `content` from `startIndex`
 - [x] extract decision of `startIndex` from `tail` to `tailFiles`
+- [x] remove `delimiter`.
+- [x] create separate functions for `lastNLines` and `lastNBytes`
 
 
 # Head

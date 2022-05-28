@@ -86,22 +86,25 @@ describe('tailFile', () => {
     const option = { flag: '-n', count: '6' };
     assert.deepStrictEqual(tailFile(['a.txt'], mockedRFS, identity, option), [{ content: '1\n2\n3\n4\n5\n6', isError: false }]);
   });
+
   it('should tail store error if the given file doesn\'t exist.', () => {
     const mockedRFS = mockRFSMultiFile(['b.txt'], ['1\n2\n3\n4\n5\n6']);
     const identity = (value) => value;
     const option = { flag: '-n', count: '10' };
     assert.deepStrictEqual(tailFile(['a.txt'], mockedRFS, identity, option), [{ content: 'tail: a.txt:no such file or directory', isError: true }]);
   });
+
   it('should tail the content of and save error for multiple files.', () => {
     const mockedRFS = mockRFSMultiFile(['a.txt'], ['1\n2\n3\n4\n5\n6']);
     const identity = (value) => value;
     const option = { flag: '-n', count: '6' };
     assert.deepStrictEqual(tailFile(['a.txt', 'b.txt'], mockedRFS, identity, option), [{ content: '1\n2\n3\n4\n5\n6', isError: false }, { content: 'tail: b.txt:no such file or directory', isError: true }]);
   });
+
   it('should tail and format the content of a single file.', () => {
     const mockedRFS = mockRFSMultiFile(['a.txt'], ['1\n2']);
-    const option = { flag: '-n', count: '6' };
-    assert.deepStrictEqual(tailFile(['a.txt'], mockedRFS, formatContent, option), [{ content: '==>a.txt<==\n1\n2', isError: false }]);
+    const option = { flag: '-n', count: '+2' };
+    assert.deepStrictEqual(tailFile(['a.txt'], mockedRFS, formatContent, option), [{ content: '==>a.txt<==\n2', isError: false }]);
   });
 });
 
